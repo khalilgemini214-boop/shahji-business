@@ -3889,7 +3889,9 @@
                 }
             }
 
-            await checkForUpdates(true);
+            // Download and stage the bundle now; it is applied on the next
+            // app start so an update never interrupts the user mid-session.
+            await checkForUpdates(false);
 
             if (typeof plugins.App.addListener === 'function') {
                 plugins.App.addListener('appStateChange', ({ isActive }) => {
