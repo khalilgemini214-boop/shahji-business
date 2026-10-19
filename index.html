@@ -2474,6 +2474,25 @@
             </div>
         </div>
 
+        <!-- Native Update Modal -->
+        <div class="modal-overlay modal-center" id="nativeUpdateModal">
+            <div class="modal" style="max-width:420px;">
+                <div class="modal-header">
+                    <h2 class="modal-title">نوی نسخه</h2>
+                    <button class="modal-close" onclick="closeNativeUpdateModal()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="nativeUpdateText" style="line-height:1.9;color:var(--text-primary);"></p>
+                    <div style="display:flex;gap:10px;margin-top:18px;">
+                        <button class="btn btn-outline" style="flex:1;" onclick="closeNativeUpdateModal()">وروسته</button>
+                        <button class="btn btn-primary" style="flex:1;" onclick="downloadNativeUpdate()">ډاونلوډ کړئ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Edit History Modal -->
         <div class="modal-overlay modal-center" id="editHistoryModal">
             <div class="modal">
@@ -3768,6 +3787,153 @@
             updateUnitsCountDisplay();
             updateDefaultCurrencyDisplay();
             updateSettingsCounts();
+        }
+
+        // ==================== APP UPDATES (OTA + NATIVE) ====================
+        // The manifest is served from the 'updates' branch via raw.githubusercontent.com
+        // because it sends Access-Control-Allow-Origin: * (GitHub release assets do not).
+        const UPDATE_MANIFEST_URL = 'https://raw.githubusercontent.com/khalilgemini214-boop/shahji-business/updates/latest.json';
+        const UPDATE_RESUME_INTERVAL_MS = 15 * 60 * 1000;
+        const DISMISSED_NATIVE_KEY = 'shahjiDismissedNativeVersion';
+
+        let pendingNativeUpdate = null;
+        let lastUpdateCheckAt = 0;
+        let updateCheckRunning = false;
+
+        function compareVersions(a, b) {
+            const pa = String(a || '0').split('.').map(x => parseInt(x, 10) || 0);
+            const pb = String(b || '0').split('.').map(x => parseInt(x, 10) || 0);
+            const len = Math.max(pa.length, pb.length);
+            for (let i = 0; i < len; i++) {
+                const x = pa[i] || 0;
+                const y = pb[i] || 0;
+                if (x > y) return 1;
+                if (x < y) return -1;
+            }
+            return 0;
+        }
+
+        async function getCurrentWebVersion() {
+            try {
+                const res = await fetch('version.json?t=' + Date.now(), { cache: 'no-store' });
+                if (!res.ok) return 0;
+                const data = await res.json();
+                return Number(data.webVersion) || 0;
+            } catch (error) {
+                return 0;
+            }
+        }
+
+        async function checkForUpdates(allowReload) {
+            if (updateCheckRunning) return;
+            updateCheckRunning = true;
+            try {
+                const plugins = (window.Capacitor && window.Capacitor.Plugins) ? window.Capacitor.Plugins : {};
+                if (!plugins.App) return; // running in a normal browser
+
+                const res = await fetch(UPDATE_MANIFEST_URL + '?t=' + Date.now(), { cache: 'no-store' });
+                if (!res.ok) return;
+                const latest = await res.json();
+                lastUpdateCheckAt = Date.now();
+
+                const info = await plugins.App.getInfo();
+                const currentNative = info.version || '0.0.0';
+
+                // A native change (new plugin, permission, icon, etc.) needs a
+                // new APK. Show the download modal and skip the web update.
+                if (latest.nativeVersionName && compareVersions(latest.nativeVersionName, currentNative) > 0) {
+                    const dismissed = localStorage.getItem(DISMISSED_NATIVE_KEY);
+                    if (dismissed !== latest.nativeVersionName) {
+                        pendingNativeUpdate = latest;
+                        showNativeUpdateModal(latest, currentNative);
+                    }
+                    return;
+                }
+
+                // Code-only change: silently download and apply the new web bundle.
+                const LiveUpdate = plugins.LiveUpdate;
+                if (!LiveUpdate || !latest.webVersion || !latest.wwwUrl) return;
+
+                const currentWeb = await getCurrentWebVersion();
+                if (Number(latest.webVersion) <= currentWeb) return;
+
+                const bundleId = 'web-' + latest.webVersion;
+                try {
+                    await LiveUpdate.downloadBundle({ url: latest.wwwUrl, bundleId: bundleId });
+                } catch (error) {
+                    // The bundle may already be downloaded from a previous attempt.
+                    console.warn('Bundle download failed or already present:', error);
+                }
+                await LiveUpdate.setNextBundle({ bundleId: bundleId });
+
+                if (allowReload) {
+                    await LiveUpdate.reload();
+                }
+            } catch (error) {
+                console.warn('Update check failed:', error);
+            } finally {
+                updateCheckRunning = false;
+            }
+        }
+
+        async function setupNativeUpdates() {
+            const plugins = (window.Capacitor && window.Capacitor.Plugins) ? window.Capacitor.Plugins : {};
+            if (!plugins.App) return; // browser: no native update system
+
+            const LiveUpdate = plugins.LiveUpdate;
+            if (LiveUpdate && typeof LiveUpdate.ready === 'function') {
+                try {
+                    await LiveUpdate.ready();
+                } catch (error) {
+                    console.warn('LiveUpdate.ready failed:', error);
+                }
+            }
+
+            await checkForUpdates(true);
+
+            if (typeof plugins.App.addListener === 'function') {
+                plugins.App.addListener('appStateChange', ({ isActive }) => {
+                    if (!isActive) return;
+                    if (Date.now() - lastUpdateCheckAt < UPDATE_RESUME_INTERVAL_MS) return;
+                    checkForUpdates(false);
+                });
+            }
+        }
+
+        function showNativeUpdateModal(latest, currentNative) {
+            const text = document.getElementById('nativeUpdateText');
+            if (text) {
+                text.textContent = 'نوی نسخه ' + (latest.nativeVersionName || '') +
+                    ' شته. اوسنی نسخه ' + currentNative +
+                    ' دی. د نوي APK د ډاونلوډ لپاره لاندې تڼۍ کېکاږئ.';
+            }
+            document.getElementById('nativeUpdateModal').classList.add('active');
+        }
+
+        function closeNativeUpdateModal() {
+            if (pendingNativeUpdate && pendingNativeUpdate.nativeVersionName) {
+                try {
+                    localStorage.setItem(DISMISSED_NATIVE_KEY, pendingNativeUpdate.nativeVersionName);
+                } catch (error) { /* ignore */ }
+            }
+            document.getElementById('nativeUpdateModal').classList.remove('active');
+        }
+
+        async function downloadNativeUpdate() {
+            const url = pendingNativeUpdate && pendingNativeUpdate.apkUrl;
+            if (!url) return;
+            const plugins = (window.Capacitor && window.Capacitor.Plugins) ? window.Capacitor.Plugins : {};
+            document.getElementById('nativeUpdateModal').classList.remove('active');
+            try {
+                if (plugins.Browser && typeof plugins.Browser.open === 'function') {
+                    await plugins.Browser.open({ url: url });
+                } else {
+                    window.open(url, '_blank');
+                }
+            } catch (error) {
+                console.warn('Could not open the APK download:', error);
+                window.open(url, '_blank');
+            }
         }
 
         // ==================== FIREBASE AUTH ====================
@@ -7474,6 +7640,7 @@
                     if (top.id === 'loginModal' && isForceLogin) return;
                     if (top.id === 'ledgerModal') { closeLedgerModal(); return; }
                     if (top.id === 'confirmModal') { closeConfirmModal(); return; }
+                    if (top.id === 'nativeUpdateModal') { closeNativeUpdateModal(); return; }
                     top.classList.remove('active');
                     return;
                 }
@@ -7498,6 +7665,7 @@
         setupAllAutocompletes();
         setupNativeBackButton();
         loadState();
+        setupNativeUpdates();
         setCurrentDate();
         updateSyncIndicator();
         renderFirebaseAccountUI();
@@ -7519,6 +7687,7 @@
                 if (e.target === overlay) {
                     if (overlay.id === 'loginModal' && isForceLogin) return;
                     if (overlay.id === 'confirmModal') confirmCallback = null;
+                    if (overlay.id === 'nativeUpdateModal') { closeNativeUpdateModal(); return; }
                     overlay.classList.remove('active');
                 }
             });

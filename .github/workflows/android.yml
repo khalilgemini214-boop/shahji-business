@@ -37,6 +37,8 @@ jobs:
         run: npm install
 
       - name: Build web bundle
+        env:
+          WEB_VERSION: ${{ github.run_number }}
         run: npm run build:web
 
       - name: Add Android platform
@@ -66,10 +68,13 @@ jobs:
           mkdir -p ~/.android
           cp signing/debug.keystore ~/.android/debug.keystore
 
+      - name: Read native version
+        run: echo "NATIVE_VERSION=$(jq -r .versionName native-version.json)" >> $GITHUB_ENV
+
       - name: Set Android version
         run: |
           sed -i "s/versionCode 1/versionCode ${{ github.run_number }}/" android/app/build.gradle
-          sed -i "s/versionName \"1.0\"/versionName \"1.0.${{ github.run_number }}\"/" android/app/build.gradle
+          sed -i "s/versionName \"1.0\"/versionName \"$NATIVE_VERSION\"/" android/app/build.gradle
 
       - name: Build debug APK
         working-directory: android
@@ -81,10 +86,14 @@ jobs:
         run: |
           cp android/app/build/outputs/apk/debug/app-debug.apk shah-saab-debug.apk
           (cd www && zip -r ../www.zip .)
+          WEB_SHA=$(sha256sum www.zip | awk '{print $1}')
           cat > latest.json <<EOF
           {
             "versionCode": ${{ github.run_number }},
-            "versionName": "1.0.${{ github.run_number }}",
+            "versionName": "$NATIVE_VERSION",
+            "nativeVersionName": "$NATIVE_VERSION",
+            "webVersion": ${{ github.run_number }},
+            "webChecksum": "$WEB_SHA",
             "apkUrl": "https://github.com/${{ github.repository }}/releases/download/build-${{ github.run_number }}/shah-saab-debug.apk",
             "wwwUrl": "https://github.com/${{ github.repository }}/releases/download/build-${{ github.run_number }}/www.zip",
             "publishedAt": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
@@ -108,3 +117,14 @@ jobs:
             latest.json
           draft: false
           prerelease: false
+
+      - name: Publish update manifest
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan update-manifest-${{ github.run_number }}
+          git rm -rf . > /dev/null 2>&1 || true
+          cp latest.json .
+          git add latest.json
+          git commit -m "Update manifest for build ${{ github.run_number }}"
+          git push --force origin HEAD:updates

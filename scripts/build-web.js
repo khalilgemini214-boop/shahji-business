@@ -26,4 +26,14 @@ fs.mkdirSync(outDir, { recursive: true });
 fs.copyFileSync(path.join(root, 'index.html'), path.join(outDir, 'index.html'));
 copyDir(path.join(root, 'vendor'), path.join(outDir, 'vendor'));
 
+// The live-update system uses this to decide whether the applied web bundle
+// is older than the published one.
+fs.writeFileSync(
+    path.join(outDir, 'version.json'),
+    JSON.stringify({
+        webVersion: Number(process.env.WEB_VERSION || 0),
+        generatedAt: new Date().toISOString()
+    }, null, 2)
+);
+
 console.log('Web assets prepared in www/');

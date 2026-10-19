@@ -28,12 +28,39 @@ Every successful build is also published as a **GitHub Release**:
 
 ## Updates
 
-- **Web/code-only changes** will be delivered silently in a future update
-  (live-update plugin + `www.zip`), without reinstalling the APK.
-- **Native changes** (new plugin, permission, icon, Capacitor upgrade) require
-  a new APK. The app will show a modal with a download link.
-- The workflow already publishes the release assets and `latest.json`, so the
-  in-app updater can be added without changing the CI pipeline.
+The app checks for updates on launch and when it resumes (at most every 15
+minutes). It reads a small manifest from the `updates` branch:
+
+```
+https://raw.githubusercontent.com/khalilgemini214-boop/shahji-business/updates/latest.json
+```
+
+- **Code-only changes (HTML/CSS/JS)** — the app downloads `www.zip` in the
+  background, applies it with the Live Update plugin, and reloads silently.
+  No APK reinstall.
+- **Native changes (new plugin, permission, icon, Capacitor upgrade)** — bump
+  `native-version.json` (`versionName`) in the same commit. The app shows a
+  modal and opens the APK download link. Install the new APK once; future
+  code-only updates remain silent.
+
+The workflow publishes `www.zip`, the APK, and `latest.json` to a GitHub
+Release, then force-updates the `updates` branch with `latest.json`. The raw
+GitHub URL is used because it allows CORS; the release APK/zip URLs are used
+for the actual downloads.
+
+### One-time step for the OTA-enabled build
+
+The previous APK (1.0.2) does not contain the update plugin. Install the
+**1.0.3** APK once. From then on, code-only pushes update silently.
+
+### Testing an OTA update
+
+1. Make a small visible change in `index.html`.
+2. Commit and push to `main`.
+3. Wait for the Actions build to finish.
+4. Open the app. It should update and reload silently.
+
+If you want to force a check, close and reopen the app.
 
 ## Stable signing
 
@@ -70,4 +97,5 @@ picker.
 
 - App name: **Shah Saab**
 - Android package: `com.paiwandsoftwares.shahsaab`
-- Version: `1.0.<build number>` (auto-incremented by CI)
+- Native version: `native-version.json` (currently `1.0.3`)
+- Build number: auto-incremented by CI (`versionCode`)
