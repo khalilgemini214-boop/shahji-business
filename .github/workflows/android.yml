@@ -124,7 +124,6 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout --orphan update-manifest-${{ github.run_number }}
           git rm -rf . > /dev/null 2>&1 || true
-          cp latest.json .
           git add latest.json
           git commit -m "Update manifest for build ${{ github.run_number }}"
           git push --force origin HEAD:updates
