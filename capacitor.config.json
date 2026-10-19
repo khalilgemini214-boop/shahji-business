@@ -1,0 +1,11 @@
+{
+  "appId": "com.paiwandsoftwares.shahsaab",
+  "appName": "Shah Saab",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}

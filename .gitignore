@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Generated web bundle
+www/
+
+# Generated Android project (built in CI)
+android/
+.gradle/
+
+# Build outputs
+*.apk
+*.aab
+*.zip
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
