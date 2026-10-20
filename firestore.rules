@@ -1,0 +1,85 @@
+rules_version = '2';
+
+// Shah Saab branch-isolation rules.
+//
+// IMPORTANT: replace MAIN_EMAIL_HERE with the email address of the main
+// account before deploying these rules. The app treats every login that is
+// not listed in the branches collection as a main account, but Firestore
+// needs one explicit email to enforce that role securely.
+//
+// Deploy with:
+//   firebase deploy --only firestore:rules
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isMain() {
+      return signedIn() && request.auth.token.email == 'shahsaab@paiwand.com';
+    }
+
+    function branchPath(branchId) {
+      return /databases/$(database)/documents/appData/shahji_business/branches/$(branchId);
+    }
+
+    function branchData(branchId) {
+      return get(branchPath(branchId)).data;
+    }
+
+    function ownsBranch(branchId) {
+      return signedIn()
+        && exists(branchPath(branchId))
+        && branchData(branchId).email == request.auth.token.email;
+    }
+
+    function isBranchUser(branchId) {
+      return ownsBranch(branchId) && branchData(branchId).active == true;
+    }
+
+    function isBranchAdmin(branchId) {
+      return isBranchUser(branchId) && branchData(branchId).role == 'admin';
+    }
+
+    function mainMayWriteSettings(collection) {
+      return isMain() && (
+        collection == 'products' ||
+        collection == 'units' ||
+        collection == 'settings'
+      );
+    }
+
+    match /appData/{appDocId} {
+      allow read, write: if isMain();
+
+      match /branches/{branchId} {
+        // A branch user may read only their own branch document. Main can
+        // read every branch.
+        allow get, list: if isMain() || ownsBranch(branchId);
+        allow create, update, delete: if isMain();
+
+        match /{collection}/{recordId} {
+          // Branch users only ever see their own branch subtree.
+          allow read: if isMain() || isBranchUser(branchId);
+
+          // Branch admins can change everything in their branch. Viewers are
+          // read-only. Main may only change per-branch settings/master data,
+          // never accounts, balances, or transactions.
+          allow create, update, delete: if isBranchAdmin(branchId) || mainMayWriteSettings(collection);
+        }
+      }
+
+      // UID -> branch mapping. A branch user can read only their own mapping.
+      match /branchUsers/{uid} {
+        allow read: if isMain() || (signedIn() && request.auth.uid == uid);
+        allow write: if isMain();
+      }
+
+      // Server-time helper document. It contains no business data.
+      match /meta/{docId} {
+        allow read, write: if signedIn();
+      }
+    }
+  }
+}

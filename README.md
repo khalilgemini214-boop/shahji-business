@@ -72,6 +72,42 @@ This is a **debug** key. It is fine for personal sideloading, but it must not
 be used for Play Store distribution. For Play Store, create a release keystore
 and store it in GitHub Secrets instead.
 
+## Branches and roles
+
+The app now stores every branch's data in its own Firestore subtree:
+
+```
+appData/shahji_business/branches/{branchId}/{collection}/{recordId}
+appData/shahji_business/branches/{branchId}/settings/main
+appData/shahji_business/branchUsers/{firebaseUid}
+```
+
+- **Main account** — any email that is not listed in the branches collection.
+  It can view every branch (with All/branch chips), manage branches, and change
+  per-branch settings, but cannot add/edit/delete accounts or transactions.
+- **Branch user (`admin`)** — read/write/edit/delete everything in its own
+  branch.
+- **Viewer (`viewer`)** — read-only access to its own branch.
+
+Branch logins are real Firebase Auth users. Creating a branch in
+**Settings → برخې** creates the Firebase user with the entered password and
+writes the UID → branch mapping used for secure lookups. The password itself is
+never stored in Firestore. Editing a branch with a new password sends a
+Firebase password-reset email.
+
+### Deploy the Firestore rules
+
+`firestore.rules` is included in the repository. Before deploying, replace
+`MAIN_EMAIL_HERE` with the email of the main account:
+
+```bash
+firebase deploy --only firestore:rules
+```
+
+The rules are what actually enforce branch isolation. UI hiding alone is not
+security. The app also clears old un-scoped local data on first launch after
+this schema change.
+
 ## Firebase notes
 
 Capacitor serves the app from `https://localhost`. In the Firebase Console:

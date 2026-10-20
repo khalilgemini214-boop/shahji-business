@@ -330,6 +330,59 @@
             gap: var(--space-sm);
         }
 
+        /* Branch selector */
+        .branch-selector {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .branch-selector-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .branch-chips {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+            scrollbar-width: none;
+        }
+
+        .branch-chips::-webkit-scrollbar {
+            display: none;
+        }
+
+        .branch-chip {
+            flex-shrink: 0;
+            padding: 6px 12px;
+            border: 1px solid #E0D5C1;
+            border-radius: var(--radius-full);
+            background: var(--surface);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .branch-chip.active {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            border-color: var(--primary);
+            color: #3E2723;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .branch-chip-static {
+            cursor: default;
+        }
+
         /* Cards */
         .card {
             background: var(--surface);
@@ -888,6 +941,161 @@
             color: var(--text-primary);
         }
 
+        .form-heading {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+
+        .money-form-account {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: rgba(244,163,0,0.16);
+            border-radius: var(--radius-full);
+            padding: 2px 8px;
+            line-height: 1.6;
+        }
+
+        .money-form-account[hidden],
+        .second-account-remove[hidden] {
+            display: none;
+        }
+
+        #moneyForm.ledger-context #moneyPartyGroup {
+            display: none;
+        }
+
+        .second-account-btn {
+            width: 100%;
+            min-height: 54px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border: 1.5px dashed rgba(62,39,35,0.28);
+            border-radius: var(--radius-md);
+            background: var(--surface);
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .second-account-btn:active {
+            transform: scale(0.99);
+        }
+
+        .second-account-btn.has-account {
+            border-style: solid;
+            border-color: var(--primary);
+            background: rgba(244,163,0,0.08);
+            color: var(--text-primary);
+        }
+
+        .second-account-btn > svg {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            color: var(--primary);
+        }
+
+        .second-account-btn-label {
+            flex: 1;
+            min-width: 0;
+            text-align: right;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .second-account-remove {
+            width: 28px;
+            height: 28px;
+            flex: 0 0 28px;
+            border-radius: var(--radius-full);
+            background: rgba(244,67,54,0.12);
+            color: var(--error);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .second-account-remove svg {
+            width: 15px;
+            height: 15px;
+        }
+
+        .second-account-list {
+            max-height: 45vh;
+            overflow-y: auto;
+        }
+
+        .second-account-option {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: 10px;
+            margin-bottom: 6px;
+            border: 1px solid transparent;
+            border-radius: var(--radius-md);
+            background: var(--bg-cream);
+            color: var(--text-primary);
+            font-family: inherit;
+            text-align: right;
+            cursor: pointer;
+        }
+
+        .second-account-option:active {
+            transform: scale(0.99);
+        }
+
+        .second-account-option.selected {
+            border-color: var(--primary);
+            background: rgba(244,163,0,0.1);
+        }
+
+        .second-account-option .account-avatar {
+            width: 36px;
+            height: 36px;
+            font-size: 1rem;
+        }
+
+        .second-account-option-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .second-account-option-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .second-account-option-type {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+        }
+
+        .second-account-option-check {
+            width: 18px;
+            height: 18px;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .second-account-empty {
+            padding: var(--space-xl);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
         .inline-form .form-body {
             padding: var(--space-lg);
         }
@@ -906,6 +1114,13 @@
         /* Form Elements */
         .form-group {
             margin-bottom: var(--space-lg);
+        }
+
+        .form-hint {
+            font-size: 0.72rem;
+            color: var(--text-light);
+            margin-top: 4px;
+            line-height: 1.6;
         }
 
         .form-label {
@@ -1014,6 +1229,8 @@
         /* Account List */
         .account-list {
             list-style: none;
+            /* Keep the last account's balance clear of the floating add button. */
+            padding-bottom: 80px;
         }
 
         .account-item {
@@ -1066,6 +1283,9 @@
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .account-phone {
@@ -1150,6 +1370,11 @@
             color: var(--text-light);
             margin-bottom: var(--space-md);
             padding-right: var(--space-md);
+        }
+
+        .settings-item.disabled {
+            opacity: 0.45;
+            pointer-events: none;
         }
 
         .settings-item {
@@ -1371,8 +1596,21 @@
             color: var(--text-primary);
         }
         .ledger-party-type {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
             font-size: 12px;
             color: var(--text-secondary);
+        }
+        .ledger-kind-label {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 1px 7px;
+            border-radius: var(--radius-full);
+            background: rgba(244,163,0,0.16);
+            color: var(--primary-dark);
+            line-height: 1.6;
         }
         .ledger-summary-row {
             display: flex;
@@ -1478,6 +1716,126 @@
             padding: var(--space-xxl);
             text-align: center;
             color: var(--text-secondary);
+        }
+
+        /* Inline account ledger (sub tab) */
+        .account-ledger-view {
+            display: none;
+        }
+        @keyframes ledgerFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .account-ledger-view.active {
+            display: block;
+            animation: ledgerFadeIn 0.25s ease;
+        }
+        #accountsListView.hidden,
+        #accountsPageTitle.hidden {
+            display: none;
+        }
+        .bottom-nav.hidden {
+            display: none;
+        }
+        .ledger-view-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+        .ledger-back-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border: none;
+            border-radius: var(--radius-full);
+            background: var(--surface);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .ledger-back-btn:active {
+            transform: scale(0.97);
+        }
+        .ledger-back-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+        .ledger-view-body .ledger-header {
+            border: 1px solid rgba(62,39,35,0.08);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-sm);
+        }
+        .ledger-view-body .ledger-list {
+            padding: 0;
+        }
+        .ledger-view-body {
+            /* Main content already clears the nav height; add a little more
+               for the fixed action bar and device safe areas. */
+            padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+        }
+        .account-ledger-form {
+            display: none;
+        }
+        .account-ledger-form.active {
+            display: block;
+        }
+        .account-ledger-form .inline-form {
+            margin-bottom: 0;
+        }
+        .ledger-action-bar {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            display: none;
+            align-items: stretch;
+            gap: var(--space-sm);
+            padding: var(--space-sm) var(--space-lg) calc(var(--space-sm) + env(safe-area-inset-bottom, 0px));
+            background: var(--surface);
+            box-shadow: 0 -4px 12px rgba(62,39,35,0.1);
+            z-index: 90;
+        }
+        .ledger-action-bar.active {
+            display: flex;
+        }
+        .ledger-action-btn {
+            flex-direction: row;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+        }
+        .ledger-action-btn svg {
+            width: 22px;
+            height: 22px;
+        }
+        .ledger-action-icon {
+            flex: 0 0 52px;
+            width: 52px;
+            border: none;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-family: inherit;
+            transition: transform 0.2s ease;
+        }
+        .ledger-action-icon:active {
+            transform: scale(0.95);
+        }
+        .ledger-action-icon svg {
+            width: 24px;
+            height: 24px;
         }
 
         /* All Transactions Tab */
@@ -1691,6 +2049,12 @@
         </header>
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Branch selector (main: all branches; branch users: own branch) -->
+            <div class="branch-selector" id="branchSelector" hidden>
+                <span class="branch-selector-label">برخه</span>
+                <div class="branch-chips" id="branchChips"></div>
+            </div>
+
             <!-- Dashboard Tab -->
             <div class="tab-page active" id="tab-dashboard">
                 <div class="page-title">
@@ -1744,7 +2108,7 @@
                 <div class="section-header">
                     <span class="section-title">چټک کار</span>
                 </div>
-                <div class="quick-actions">
+                <div class="quick-actions" id="quickActions">
                     <button class="quick-action" onclick="switchTab('tab-transactions'); setTimeout(() => { switchTransactionSubTab('stock'); openStockForm('buy'); }, 150)">
                         <svg class="quick-action-icon" viewBox="0 0 24 24" fill="var(--secondary)">
                             <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 2 2 2-.9 2-2-.9-2-2-2z"/>
@@ -1768,41 +2132,89 @@
 
             <!-- Accounts Tab -->
             <div class="tab-page" id="tab-accounts">
-                <div class="page-title">
+                <div class="page-title" id="accountsPageTitle">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
                     حسابونه
                 </div>
 
-                <!-- Account Main Tabs: Stock / Money -->
-                <div class="account-tabs" id="accountMainTabs">
-                    <button class="account-tab active" onclick="switchAccountSubTab('stock')">سټاک</button>
-                    <button class="account-tab" onclick="switchAccountSubTab('money')">پيسې</button>
+                <!-- Accounts list view -->
+                <div id="accountsListView">
+                    <!-- Account Main Tabs: Stock / Money -->
+                    <div class="account-tabs" id="accountMainTabs">
+                        <button class="account-tab active" onclick="switchAccountSubTab('stock')">سټاک</button>
+                        <button class="account-tab" onclick="switchAccountSubTab('money')">پيسې</button>
+                    </div>
+
+                    <!-- Account Type Filters -->
+                    <div class="account-tabs" id="accountTypeFilters">
+                        <button class="account-tab active" onclick="filterAccounts('all')" id="filterAll">ټول</button>
+                        <button class="account-tab" onclick="filterAccounts('supplier')" id="filterSupplier">سپلايران</button>
+                        <button class="account-tab" onclick="filterAccounts('mill')" id="filterMill">ميل</button>
+                        <button class="account-tab" onclick="filterAccounts('customer')" id="filterCustomer">ګراکان</button>
+                    </div>
+
+                    <div class="search-bar">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                        <input type="text" class="search-input" id="accountSearch" placeholder="حساب وپلټئ..." autocomplete="off">
+                    </div>
+                    <div id="accountList"></div>
+
+                    <!-- FAB for adding account -->
+                    <button class="fab" id="addAccountFab" onclick="openPartyModal()">
+                        <svg class="fab-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                    </button>
                 </div>
 
-                <!-- Account Type Filters -->
-                <div class="account-tabs" id="accountTypeFilters">
-                    <button class="account-tab active" onclick="filterAccounts('all')" id="filterAll">ټول</button>
-                    <button class="account-tab" onclick="filterAccounts('supplier')" id="filterSupplier">سپلايران</button>
-                    <button class="account-tab" onclick="filterAccounts('mill')" id="filterMill">ميل</button>
-                    <button class="account-tab" onclick="filterAccounts('customer')" id="filterCustomer">ګراکان</button>
-                </div>
+                <!-- Account ledger view (sub tab) -->
+                <div class="account-ledger-view" id="accountLedgerView">
+                    <div class="ledger-view-header">
+                        <button class="ledger-back-btn" onclick="handleLedgerBack()" aria-label="بیرته">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M4 11h12.17l-5.59-5.59L12 4l8 8-8 8-1.41-1.41L16.17 13H4v-2z"/>
+                            </svg>
+                            <span>بیرته</span>
+                        </button>
+                    </div>
+                    <div class="ledger-view-body" id="ledgerContent"></div>
+                    <div class="account-ledger-form" id="ledgerFormSection"></div>
 
-                <div class="search-bar">
-                    <svg class="search-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
-                    </svg>
-                    <input type="text" class="search-input" id="accountSearch" placeholder="حساب وپلټئ..." autocomplete="off">
-                </div>
-                <div id="accountList"></div>
+                    <!-- Stock ledger actions -->
+                    <div class="ledger-action-bar" id="ledgerStockActions">
+                        <button class="transaction-btn buy-btn ledger-action-btn" onclick="openLedgerTransactionForm('buy')">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                            </svg>
+                            <span>رانيول</span>
+                        </button>
+                        <button class="ledger-action-icon transfer-btn" onclick="openLedgerTransactionForm('transfer')" aria-label="ټرانسفر" title="ټرانسفر">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                            </svg>
+                        </button>
+                        <button class="transaction-btn sell-btn ledger-action-btn" onclick="openLedgerTransactionForm('sell')">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17 18c-1.1 0-1.99.9-1.99 2s.89 2 2 2 2-.9 2-2-.9-2-2-2zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm5-4c-1.1 0-1.99.9-1.99 2s.89 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                            </svg>
+                            <span>خرڅول</span>
+                        </button>
+                    </div>
 
-                <!-- FAB for adding account -->
-                <button class="fab" onclick="openPartyModal()">
-                    <svg class="fab-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                    </svg>
-                </button>
+                    <!-- Money ledger actions -->
+                    <div class="ledger-action-bar" id="ledgerMoneyActions">
+                        <button class="transaction-btn buy-btn ledger-action-btn" onclick="openLedgerTransactionForm('credit')">
+                            <span>جمع</span>
+                        </button>
+                        <button class="transaction-btn sell-btn ledger-action-btn" onclick="openLedgerTransactionForm('debit')">
+                            <span>بنام</span>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <!-- Transactions Tab -->
@@ -1856,7 +2268,7 @@
                 <div class="inline-form" id="buyForm">
                     <div class="form-header">
                         <h2 class="form-title">رانيول</h2>
-                        <button class="modal-close" onclick="closeBuyForm()">
+                        <button class="modal-close" onclick="requestCloseBuyForm()">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                             </svg>
@@ -1935,7 +2347,7 @@
                 <div class="inline-form" id="sellForm">
                     <div class="form-header">
                         <h2 class="form-title">خرڅول</h2>
-                        <button class="modal-close" onclick="closeSellForm()">
+                        <button class="modal-close" onclick="requestCloseSellForm()">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                             </svg>
@@ -2020,7 +2432,7 @@
                 <div class="inline-form" id="transferForm">
                     <div class="form-header">
                         <h2 class="form-title">ټرانسفر (Transfer Stock)</h2>
-                        <button class="modal-close" onclick="closeTransferForm()">
+                        <button class="modal-close" onclick="requestCloseTransferForm()">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                             </svg>
@@ -2034,39 +2446,43 @@
                             <input type="date" class="form-input" id="transferDate">
                         </div>
 
-                        <div class="form-group">
-                            <label class="form-label">له (From)</label>
-                            <div class="autocomplete">
-                                <input type="text" class="autocomplete-input" id="transferFromSearch" placeholder="له وټاکئ..." autocomplete="off">
-                                <div class="autocomplete-list" id="transferFromList"></div>
-                                <input type="hidden" id="transferFrom" value="">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">له (From)</label>
+                                <div class="autocomplete">
+                                    <input type="text" class="autocomplete-input" id="transferFromSearch" placeholder="له وټاکئ..." autocomplete="off">
+                                    <div class="autocomplete-list" id="transferFromList"></div>
+                                    <input type="hidden" id="transferFrom" value="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">ته (To)</label>
+                                <div class="autocomplete">
+                                    <input type="text" class="autocomplete-input" id="transferToSearch" placeholder="ته وټاکئ..." autocomplete="off">
+                                    <div class="autocomplete-list" id="transferToList"></div>
+                                    <input type="hidden" id="transferTo" value="">
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="form-label">ته (To)</label>
-                            <div class="autocomplete">
-                                <input type="text" class="autocomplete-input" id="transferToSearch" placeholder="ته وټاکئ..." autocomplete="off">
-                                <div class="autocomplete-list" id="transferToList"></div>
-                                <input type="hidden" id="transferTo" value="">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">مال</label>
+                                <select class="form-input" id="transferProduct">
+                                </select>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label class="form-label">مال</label>
-                            <select class="form-input" id="transferProduct">
-                            </select>
-                        </div>
+                            <div class="form-group">
+                                <label class="form-label">مقدار</label>
+                                <select class="form-input" id="transferUnit" onchange="updateTransferFormUnitLabels()">
+                                </select>
+                            </div>
 
-                        <div class="form-group">
-                            <label class="form-label">مقدار</label>
-                            <select class="form-input" id="transferUnit" onchange="updateTransferFormUnitLabels()">
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label" id="transferQuantityLabel">کيلو</label>
-                            <input type="number" class="form-input" id="transferQuantity" placeholder="مقدار">
+                            <div class="form-group">
+                                <label class="form-label" id="transferQuantityLabel">کيلو</label>
+                                <input type="number" class="form-input" id="transferQuantity" placeholder="مقدار">
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -2083,8 +2499,11 @@
                 <!-- Money Form Inline -->
                 <div class="inline-form" id="moneyForm">
                     <div class="form-header">
-                        <h2 class="form-title" id="moneyFormTitle">پیسې معامله</h2>
-                        <button class="modal-close" onclick="closeMoneyForm()">
+                        <div class="form-heading">
+                            <h2 class="form-title" id="moneyFormTitle">پیسې معامله</h2>
+                            <span class="money-form-account" id="moneyFormAccountName" hidden></span>
+                        </div>
+                        <button class="modal-close" onclick="requestCloseMoneyForm()">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                             </svg>
@@ -2102,22 +2521,11 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group" style="flex: 0.5;">
+                            <div class="form-group" id="moneyDateGroup">
                                 <label class="form-label">نيټه</label>
                                 <input type="date" class="form-input" id="moneyDate">
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">خپلمني</label>
-                                <div class="autocomplete">
-                                    <input type="text" class="autocomplete-input" id="moneyPartySearch" placeholder="وټاکئ..." autocomplete="off">
-                                    <div class="autocomplete-list" id="moneyPartyList"></div>
-                                    <input type="hidden" id="moneyParty" value="">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
+                            <div class="form-group" id="moneyCurrencyGroup">
                                 <label class="form-label">اسعار</label>
                                 <select class="form-input" id="moneyCurrency" onchange="currentMoneyCurrency = this.value">
                                     <option value="PKR">کالداري (PKR)</option>
@@ -2126,10 +2534,20 @@
                                     <option value="Toman">تومن (Toman)</option>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">مبلغ</label>
-                                <input type="number" class="form-input" id="moneyAmount" placeholder="مبلغ">
+                        </div>
+
+                        <div class="form-group" id="moneyPartyGroup">
+                            <label class="form-label">خپلمني</label>
+                            <div class="autocomplete">
+                                <input type="text" class="autocomplete-input" id="moneyPartySearch" placeholder="وټاکئ..." autocomplete="off">
+                                <div class="autocomplete-list" id="moneyPartyList"></div>
+                                <input type="hidden" id="moneyParty" value="">
                             </div>
+                        </div>
+
+                        <div class="form-group" id="moneyAmountGroup">
+                            <label class="form-label">مبلغ</label>
+                            <input type="number" class="form-input" id="moneyAmount" placeholder="مبلغ">
                         </div>
 
                         <div class="form-group">
@@ -2137,18 +2555,20 @@
                             <input type="text" class="form-input" id="moneyNotes" placeholder="ياداشت">
                         </div>
 
-                        <div class="form-group" style="display: flex; align-items: center; gap: var(--space-sm);">
-                            <input type="checkbox" id="moneyHasTransfer" checked onchange="toggleMoneyTransfer()">
-                            <label class="form-label" style="margin-bottom: 0;"> Transfer Account</label>
-                        </div>
-
-                        <div class="form-group" id="moneyTransferGroup">
-                            <label class="form-label">ټرانسفر حساب</label>
-                            <div class="autocomplete">
-                                <input type="text" class="autocomplete-input" id="moneyTransferPartySearch" placeholder="وټاکئ..." autocomplete="off">
-                                <div class="autocomplete-list" id="moneyTransferPartyList"></div>
-                                <input type="hidden" id="moneyTransferParty" value="">
+                        <div class="form-group">
+                            <label class="form-label">دويم اکاونټ (اختیاري)</label>
+                            <div class="second-account-btn" id="moneySecondAccountBtn" role="button" tabindex="0" onclick="openMoneySecondAccountModal()">
+                                <svg viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                                </svg>
+                                <span class="second-account-btn-label" id="moneySecondAccountLabel">دويم اکاونټ</span>
+                                <span class="second-account-remove" id="moneySecondAccountRemove" hidden onclick="event.stopPropagation(); clearMoneySecondAccount()" role="button" aria-label="لرې کول">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                                    </svg>
+                                </span>
                             </div>
+                            <input type="hidden" id="moneyTransferParty" value="">
                         </div>
                     </div>
                     <div class="form-footer">
@@ -2237,7 +2657,7 @@
                 <!-- Currency Settings -->
                 <div class="settings-section">
                     <div class="settings-title">اساسي تنظیمات</div>
-                    <div class="settings-item" onclick="showDefaultCurrencyModal()">
+                    <div class="settings-item" id="settingsDefaultCurrency" onclick="showDefaultCurrencyModal()">
                         <div class="settings-icon currency">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/>
@@ -2253,7 +2673,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="settings-item" onclick="showProductsModal()">
+                    <div class="settings-item" id="settingsProducts" onclick="showProductsModal()">
                         <div class="settings-icon currency">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
@@ -2269,7 +2689,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="settings-item" onclick="showUnitsModal()">
+                    <div class="settings-item" id="settingsUnits" onclick="showUnitsModal()">
                         <div class="settings-icon currency">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
@@ -2287,10 +2707,17 @@
                     </div>
                 </div>
 
+                <!-- Branch Management (main only) -->
+                <div class="settings-section" id="branchesSettingsSection" style="display:none;">
+                    <div class="settings-title">برخې (Branches)</div>
+                    <div id="branchesList"></div>
+                    <button class="btn btn-primary" style="width:100%; margin-top:10px;" onclick="openBranchModal()">نوې برخه زیاته کړه</button>
+                </div>
+
                 <!-- Data Management -->
                 <div class="settings-section">
                     <div class="settings-title">ډیټا مدیریت</div>
-                    <div class="settings-item" onclick="exportData()">
+                    <div class="settings-item" id="settingsExport" onclick="exportData()">
                         <div class="settings-icon backup">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
@@ -2306,7 +2733,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="settings-item" onclick="importDataPrompt()">
+                    <div class="settings-item" id="settingsImport" onclick="importDataPrompt()">
                         <div class="settings-icon backup">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/>
@@ -2322,7 +2749,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="settings-item" onclick="clearAllData()">
+                    <div class="settings-item" id="settingsClear" onclick="clearAllData()">
                         <div class="settings-icon" style="color: var(--danger);">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
@@ -2408,19 +2835,6 @@
             </button>
         </nav>
 
-        <!-- Ledger Modal -->
-        <div class="modal-overlay modal-center" id="ledgerModal">
-            <div class="modal">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="ledgerModalTitle">لیجر</h2>
-                    <button class="modal-close" onclick="closeLedgerModal()">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                    </button>
-                </div>
-                <div class="modal-body" id="ledgerContent"></div>
-            </div>
-        </div>
-
         <!-- Ledger Currency Modal -->
         <div class="modal-overlay modal-center" id="ledgerCurrencyModal">
             <div class="modal" style="max-width:300px;">
@@ -2444,6 +2858,27 @@
                     </button>
                 </div>
                 <div class="modal-body" id="ledgerProductOptions"></div>
+            </div>
+        </div>
+
+        <!-- Money Second Account Modal -->
+        <div class="modal-overlay modal-center" id="moneySecondAccountModal">
+            <div class="modal" style="max-width:420px;">
+                <div class="modal-header">
+                    <h2 class="modal-title">دويم اکاونټ وټاکئ</h2>
+                    <button class="modal-close" onclick="closeMoneySecondAccountModal()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="search-bar">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                        </svg>
+                        <input type="text" class="search-input" id="moneySecondAccountSearch" placeholder="حساب وپلټئ..." autocomplete="off" oninput="renderMoneySecondAccountOptions()">
+                    </div>
+                    <div class="second-account-list" id="moneySecondAccountList"></div>
+                </div>
             </div>
         </div>
 
@@ -2540,6 +2975,51 @@
             </div>
         </div>
 
+        <!-- Branch Modal -->
+        <div class="modal-overlay modal-center" id="branchModal">
+            <div class="modal" style="max-width:420px;">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="branchModalTitle">نوې برخه</h2>
+                    <button class="modal-close" onclick="closeBranchModal()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="branchId">
+                    <div class="form-group">
+                        <label class="form-label">د برخې نوم</label>
+                        <input type="text" class="form-input" id="branchName" placeholder="لکه کابل څانګه">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">ایمیل</label>
+                        <input type="email" class="form-input" id="branchEmail" placeholder="branch@email.com" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" id="branchPasswordLabel">پاسورډ</label>
+                        <input type="password" class="form-input" id="branchPassword" placeholder="********" autocomplete="new-password">
+                        <div class="form-hint" id="branchPasswordHint" style="display:none;">د پاسورډ بدلولو لپاره به د برخې ایمیل ته د بیا تنظیم لینک واستول شي.</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">ډول</label>
+                        <div class="type-selector" id="branchRoleSelector">
+                            <button type="button" class="type-option" data-role="admin" onclick="selectBranchRole('admin')">برخه کارن</button>
+                            <button type="button" class="type-option" data-role="viewer" onclick="selectBranchRole('viewer')">یوازې لیدونکی</button>
+                        </div>
+                    </div>
+                    <div class="form-group" id="branchActiveGroup" style="display:none;">
+                        <label class="form-label" style="display:flex; align-items:center; gap:8px;">
+                            <input type="checkbox" id="branchActive">
+                            فعاله برخه
+                        </label>
+                    </div>
+                    <div style="display:flex;gap:10px;margin-top:15px;">
+                        <button class="btn btn-primary" style="flex:1;" onclick="saveBranch()">خوندی کول</button>
+                        <button class="btn btn-danger" id="deactivateBranchBtn" onclick="deactivateBranch()" style="display:none;">غیر فعالول</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Party Modal -->
         <div class="modal-overlay modal-center" id="partyModal">
             <div class="modal" style="max-width:400px;">
@@ -2563,6 +3043,13 @@
                     <div class="form-group">
                         <label class="form-label">ټليفون (اختیاری)</label>
                         <input type="text" class="form-input" id="partyPhone" placeholder="ټليفون نمبر">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">ځای (اختیاري)</label>
+                        <div class="autocomplete">
+                            <input type="text" class="autocomplete-input" id="partyLocation" placeholder="لکه کابل" autocomplete="off">
+                            <div class="autocomplete-list" id="partyLocationList"></div>
+                        </div>
                     </div>
                     <div style="display:flex;gap:10px;margin-top:15px;">
                         <button class="btn btn-primary" style="flex:1;" onclick="saveParty()">خوندی کول</button>
@@ -2739,6 +3226,14 @@
 
         // Firestore reference
         const APP_DOC = 'appData/shahji_business';
+
+        function getBranchDocRef(branchId) {
+            return db.doc(APP_DOC).collection('branches').doc(branchId);
+        }
+
+        function getBranchCollectionRef(branchId, collection) {
+            return getBranchDocRef(branchId).collection(collection);
+        }
         const APP_STORAGE_KEY = 'riceBusinessApp';
 
         // When false, nothing is written to localStorage (used after logout so the
@@ -2840,15 +3335,48 @@
         }
 
         // ==================== SYNC QUEUE HELPERS ====================
-        function enqueueSync(collection, ids, skipSave) {
+        function enqueueSync(collection, ids, skipSave, branchId) {
             if (!Array.isArray(ids)) ids = [ids];
+            const itemBranchId = collection === 'branches'
+                ? null
+                : (branchId || (state.currentBranchId && state.currentBranchId !== 'all' ? state.currentBranchId : null));
             ids.forEach(id => {
                 if (!id) return;
-                const found = state.syncQueue.find(q => q.collection === collection && q.id === id);
+                const found = state.syncQueue.find(q =>
+                    q.collection === collection && q.id === id && (q.branchId || null) === itemBranchId
+                );
+
+                // Main can switch between branch views, so capture a snapshot
+                // of its settings/master-data writes before the active state is
+                // replaced by another branch.
+                let payload = null;
+                if (state.currentRole === 'main' && ['settings', 'products', 'units'].includes(collection)) {
+                    if (collection === 'settings') {
+                        payload = {
+                            id: 'main',
+                            defaultCurrency: state.defaultCurrency,
+                            defaultUnit: state.defaultUnit,
+                            defaultProduct: state.defaultProduct,
+                            branchId: itemBranchId,
+                            updatedAt: Date.now()
+                        };
+                    } else {
+                        const rec = (state[collection] || []).find(r => r.id === id);
+                        if (rec) payload = JSON.parse(JSON.stringify(rec));
+                    }
+                }
+
                 if (found) {
                     found.updatedAt = Date.now();
+                    if (payload) found.payload = payload;
                 } else {
-                    state.syncQueue.push({ collection: collection, id: id, updatedAt: Date.now() });
+                    state.syncQueue.push({
+                        collection: collection,
+                        id: id,
+                        branchId: itemBranchId,
+                        updatedAt: Date.now(),
+                        ...(payload ? { payload: payload } : {})
+                    });
                 }
             });
             updateSyncIndicator();
@@ -2857,17 +3385,25 @@
             if (!skipSave) saveState();
         }
 
-        function removeFromQueue(collection, id) {
-            state.syncQueue = state.syncQueue.filter(q => !(q.collection === collection && q.id === id));
+        function removeFromQueue(collection, id, branchId) {
+            const itemBranchId = collection === 'branches'
+                ? null
+                : (branchId || (state.currentBranchId && state.currentBranchId !== 'all' ? state.currentBranchId : null));
+            state.syncQueue = state.syncQueue.filter(q =>
+                !(q.collection === collection && q.id === id && (q.branchId || null) === itemBranchId)
+            );
             updateSyncIndicator();
         }
 
         function enqueueAll() {
+            const branchId = state.currentBranchId && state.currentBranchId !== 'all' ? state.currentBranchId : null;
+            if (!branchId) return;
             SYNC_COLLECTIONS.forEach(collection => {
                 (state[collection] || []).forEach(rec => {
-                    if (rec && rec.id) enqueueSync(collection, rec.id, true);
+                    if (rec && rec.id) enqueueSync(collection, rec.id, true, branchId);
                 });
             });
+            enqueueSync('settings', 'main', true, branchId);
             saveState();
         }
 
@@ -2916,6 +3452,12 @@
             deletedTransactions: [],  // { id, fullData, deletedBy, deletedAt }
             editHistory: [],         // { id, transactionId, previousData, newData, editedBy, editedAt }
 
+            // Branches
+            branches: [],           // { id, name, email, role, active, ... }
+            currentBranchId: null,  // branch id, or 'all' for main accounts
+            currentRole: null,      // 'main' | 'admin' | 'viewer'
+            branchSettings: {},     // branchId -> settings (main "all" view)
+
             // App Settings
             defaultCurrency: 'PKR',
             defaultUnit: 'kg',
@@ -2926,35 +3468,49 @@
             lastFetch: null,
             syncQueue: [],
             loginStatus: false,
-            migrated: false
+            migrated: false,
+            branchSchema: 2
         };
 
         // Ensure every collection/default exists (fresh install, old data, import).
-        function ensureStateDefaults() {
-            const arrayKeys = ['users', 'products', 'units', 'accounts', 'stockBalances', 'moneyBalances', 'transactions', 'deletedTransactions', 'editHistory'];
+        function ensureStateDefaults(allowSeed = true, seedBranchId = null) {
+            const arrayKeys = ['users', 'branches', 'products', 'units', 'accounts', 'stockBalances', 'moneyBalances', 'transactions', 'deletedTransactions', 'editHistory'];
             arrayKeys.forEach(key => { if (!Array.isArray(state[key])) state[key] = []; });
 
-            if (!state.products.some(p => p && !p.isDeleted)) {
-                state.products.push({
+            if (state.currentBranchId === undefined) state.currentBranchId = null;
+            if (state.currentRole === undefined) state.currentRole = null;
+
+            const effectiveBranchId = (seedBranchId && seedBranchId !== 'all')
+                ? seedBranchId
+                : (state.currentBranchId && state.currentBranchId !== 'all' ? state.currentBranchId : null);
+
+            if (allowSeed && !state.products.some(p => p && !p.isDeleted)) {
+                const product = {
                     id: 'rice',
                     name: 'وريجي',
+                    branchId: effectiveBranchId,
                     version: 1,
                     createdAt: Date.now(),
                     lastModifiedAt: Date.now(),
                     updatedAt: Date.now(),
                     createdBy: state.currentUser?.uid || 'system'
-                });
+                };
+                state.products.push(product);
+                if (effectiveBranchId) enqueueSync('products', product.id, true, effectiveBranchId);
             }
-            if (!state.units.some(u => u && !u.isDeleted)) {
-                state.units.push({
+            if (allowSeed && !state.units.some(u => u && !u.isDeleted)) {
+                const unit = {
                     id: 'kg',
                     name: 'کيلو',
+                    branchId: effectiveBranchId,
                     version: 1,
                     createdAt: Date.now(),
                     lastModifiedAt: Date.now(),
                     updatedAt: Date.now(),
                     createdBy: state.currentUser?.uid || 'system'
-                });
+                };
+                state.units.push(unit);
+                if (effectiveBranchId) enqueueSync('units', unit.id, true, effectiveBranchId);
             }
 
             if (!state.defaultCurrency) state.defaultCurrency = 'PKR';
@@ -2989,9 +3545,21 @@
                     resetState();
                 }
             }
-            // Always run defaults, including on a brand-new device where the app
-            // previously had no product/unit at all.
-            ensureStateDefaults();
+            // Moving to per-branch storage is a schema break. Clear old
+            // un-scoped business data so it cannot leak into a branch.
+            if (state.branchSchema !== 2) {
+                state.branches = [];
+                state.currentBranchId = null;
+                state.currentRole = null;
+                state.syncQueue = [];
+                ['products', 'units', 'accounts', 'stockBalances', 'moneyBalances', 'transactions', 'deletedTransactions', 'editHistory']
+                    .forEach(collection => { state[collection] = []; });
+                state.branchSchema = 2;
+            }
+
+            // Do not invent products/units before a branch is loaded. Branch
+            // initialization (or main's branch snapshot) supplies defaults.
+            ensureStateDefaults(false);
             updateDefaultCurrencyDisplay();
             updateProductsCountDisplay();
             updateUnitsCountDisplay();
@@ -3016,6 +3584,10 @@
             state = {
                 users: [],
                 currentUser: null,
+                branches: [],
+                currentBranchId: null,
+                currentRole: null,
+                branchSettings: {},
                 products: [{ id: 'rice', name: 'وريجي', createdAt: Date.now(), createdBy: 'system' }],
                 units: [{ id: 'kg', name: 'کيلو', createdAt: Date.now(), createdBy: 'system' }],
                 accounts: [],
@@ -3031,12 +3603,14 @@
                 lastFetch: null,
                 syncQueue: [],
                 loginStatus: false,
-                migrated: false
+                migrated: false,
+                branchSchema: 2
             };
         }
 
         // Clear local data only. Firestore data is intentionally left untouched.
         async function clearAllData() {
+            if (!canWriteBusinessData()) { showToast('تاسو د بدلون اجازه نلرئ'); return; }
             if (confirm('تاسې غواړی یوازې په دې وسیله کې خوندي شوې ډیټا لرې کړئ؟ (فایربیس به پاک نشي)')) {
                 resetState();
                 await handleLogout();
@@ -3055,9 +3629,11 @@
 
         // ==================== PRODUCT HELPERS ====================
         function addProduct(name) {
+            if (!guardSettingsWrite()) return null;
             const product = {
                 id: 'product_' + generateId(),
                 name: name.trim(),
+                branchId: state.currentBranchId,
                 version: 1,
                 createdAt: Date.now(),
                 lastModifiedAt: Date.now(),
@@ -3071,6 +3647,7 @@
         }
 
         function updateProduct(id, name) {
+            if (!guardSettingsWrite()) return false;
             const product = state.products.find(p => p.id === id);
             if (product) {
                 product.name = name.trim();
@@ -3086,6 +3663,7 @@
         }
 
         function deleteProductById(id) {
+            if (!guardSettingsWrite()) return false;
             const inUse = state.transactions.filter(t => !t.isDeleted).some(t => t.productId === id);
             if (inUse) return false;
             if (state.products.filter(p => !p.isDeleted).length <= 1) return false;
@@ -3128,9 +3706,11 @@
 
         // ==================== UNIT HELPERS ====================
         function addUnit(name) {
+            if (!guardSettingsWrite()) return null;
             const unit = {
                 id: 'unit_' + generateId(),
                 name: name.trim(),
+                branchId: state.currentBranchId,
                 version: 1,
                 createdAt: Date.now(),
                 lastModifiedAt: Date.now(),
@@ -3144,6 +3724,7 @@
         }
 
         function updateUnit(id, name) {
+            if (!guardSettingsWrite()) return false;
             const unit = state.units.find(u => u.id === id);
             if (unit) {
                 unit.name = name.trim();
@@ -3159,6 +3740,7 @@
         }
 
         function deleteUnit(id) {
+            if (!guardSettingsWrite()) return false;
             const inUse = state.transactions.filter(t => !t.isDeleted).some(t => t.unitId === id);
             if (inUse) return false;
             if (state.units.filter(u => !u.isDeleted).length <= 1) return false;
@@ -3198,13 +3780,73 @@
             return state.units.find(u => u.id === id);
         }
 
+        // ==================== BRANCH / ROLE HELPERS ====================
+        function isMainAccount() {
+            return state.currentRole === 'main';
+        }
+
+        function isViewerAccount() {
+            return state.currentRole === 'viewer';
+        }
+
+        function isBranchAdmin() {
+            return state.currentRole === 'admin';
+        }
+
+        // Only a branch admin can change accounts/transactions.
+        function canWriteBusinessData() {
+            return state.currentRole === 'admin';
+        }
+
+        // Main and branch admins can change per-branch master settings
+        // (products, units, defaults). Viewers cannot.
+        function canManageSettings() {
+            return state.currentRole === 'main' || state.currentRole === 'admin';
+        }
+
+        function canManageBranches() {
+            return state.currentRole === 'main';
+        }
+
+        function getBranchById(id) {
+            return (state.branches || []).find(b => b.id === id);
+        }
+
+        function getBranchName(id) {
+            const branch = getBranchById(id);
+            return branch ? branch.name : '';
+        }
+
+        function getCurrentBranchSettings() {
+            return {
+                defaultCurrency: state.defaultCurrency,
+                defaultUnit: state.defaultUnit,
+                defaultProduct: state.defaultProduct
+            };
+        }
+
+        function guardBusinessWrite() {
+            if (canWriteBusinessData()) return true;
+            showToast('تاسو د بدلون اجازه نلرئ');
+            return false;
+        }
+
+        function guardSettingsWrite() {
+            if (canManageSettings() && state.currentBranchId && state.currentBranchId !== 'all') return true;
+            showToast(state.currentBranchId === 'all' ? 'لومړی یوه برخه وټاکئ' : 'تاسو د بدلون اجازه نلرئ');
+            return false;
+        }
+
         // ==================== ACCOUNT HELPERS ====================
-        function addAccount(name, type, phone = '') {
+        function addAccount(name, type, phone = '', location = '') {
+            if (!guardBusinessWrite()) return null;
             const account = {
                 id: 'account_' + generateId(),
                 name: name.trim(),
                 type: type, // 'supplier', 'mill', 'customer'
                 phone: phone.trim(),
+                location: location.trim(),
+                branchId: state.currentBranchId,
                 version: 1,
                 createdAt: Date.now(),
                 lastModifiedAt: Date.now(),
@@ -3217,12 +3859,14 @@
             return account;
         }
 
-        function updateAccount(id, name, type, phone) {
+        function updateAccount(id, name, type, phone, location = '') {
+            if (!guardBusinessWrite()) return false;
             const account = state.accounts.find(a => a.id === id);
             if (account) {
                 account.name = name.trim();
                 account.type = type;
                 account.phone = phone.trim();
+                account.location = location.trim();
                 account.version = (account.version || 0) + 1;
                 account.lastModifiedAt = Date.now();
                 account.updatedAt = Date.now();
@@ -3235,6 +3879,7 @@
         }
 
         function deleteAccount(id) {
+            if (!guardBusinessWrite()) return false;
             const inUse = state.transactions.filter(t => !t.isDeleted).some(t => t.accountId === id || t.toAccountId === id);
             if (inUse) return false;
             // Also soft-delete associated balances
@@ -3308,6 +3953,7 @@
                     productId,
                     unitId,
                     quantity: roundTo(quantityDelta, 3),
+                    branchId: (getAccountById(accountId) || {}).branchId || state.currentBranchId,
                     version: 1,
                     lastModifiedAt: Date.now(),
                     updatedAt: Date.now()
@@ -3333,6 +3979,7 @@
                     accountId,
                     currency,
                     amount: roundTo(amountDelta, 2),
+                    branchId: (getAccountById(accountId) || {}).branchId || state.currentBranchId,
                     version: 1,
                     lastModifiedAt: Date.now(),
                     updatedAt: Date.now()
@@ -3361,6 +4008,7 @@
                 notes: data.notes || '',
                 fullNote: data.fullNote || '',
                 parentId: data.parentId || null,
+                branchId: state.currentBranchId,
                 version: 1,
                 createdBy: state.currentUser?.uid || 'system',
                 createdAt: Date.now(),
@@ -3385,6 +4033,7 @@
                     previousData: { ...transaction },
                     newData: { ...data },
                     editedBy: state.currentUser?.uid || 'system',
+                    branchId: transaction.branchId || state.currentBranchId,
                     version: 1,
                     editedAt: Date.now()
                 };
@@ -3415,6 +4064,7 @@
                 originalId: id,
                 fullData: { ...transaction },
                 deletedBy: state.currentUser?.uid || 'system',
+                branchId: transaction.branchId || state.currentBranchId,
                 version: 1,
                 deletedAt: Date.now()
             };
@@ -3476,21 +4126,28 @@
         }
 
         // Get the full record for a queued sync item (from local offline-first state)
-        function getQueueRecord(collection, id) {
+        function getQueueRecord(item) {
+            const collection = item.collection;
+            const id = item.id;
+            if (item.payload) return item.payload;
             if (collection === 'settings') {
-                const entry = (state.syncQueue || []).find(q => q.collection === 'settings' && q.id === id);
                 return {
                     id: 'main',
                     defaultCurrency: state.defaultCurrency,
                     defaultUnit: state.defaultUnit,
                     defaultProduct: state.defaultProduct,
-                    updatedAt: (entry && entry.updatedAt) || Date.now()
+                    branchId: item.branchId,
+                    updatedAt: item.updatedAt || Date.now()
                 };
+            }
+            if (collection === 'branches') {
+                return (state.branches || []).find(b => b.id === id) || null;
             }
             const arr = state[collection];
             if (!Array.isArray(arr)) return null;
             const rec = arr.find(r => r.id === id);
             if (!rec) return null;
+            if (!rec.branchId) rec.branchId = item.branchId || state.currentBranchId;
             if (!rec.updatedAt) rec.updatedAt = rec.lastModifiedAt || rec.createdAt || Date.now();
             return rec;
         }
@@ -3518,58 +4175,11 @@
             if (data.defaultProduct) state.defaultProduct = data.defaultProduct;
         }
 
-        // One-time migration: copy any legacy single-doc data into per-record subcollections
+        // Branch-aware data has no legacy single-document migration. Existing
+        // demo data is intentionally ignored; the business starts fresh inside
+        // branch documents.
         async function migrateLegacyData() {
-            if (state.migrated) return;
             state.migrated = true;
-
-            // Never let an old legacy snapshot overwrite data that already
-            // exists locally (it would merge stale fields over newer records).
-            if (state.transactions.length || state.accounts.length) {
-                saveState(true);
-                return;
-            }
-
-            try {
-                const doc = await withTimeout(db.doc(APP_DOC).get(), 15000);
-                if (doc.exists) {
-                    const data = doc.data();
-                    const jobs = [];
-                    SYNC_COLLECTIONS.forEach(collection => {
-                        const list = data[collection];
-                        if (Array.isArray(list)) {
-                            list.forEach(rec => {
-                                if (!rec || !rec.id) return;
-                                if (!rec.updatedAt) rec.updatedAt = rec.lastModifiedAt || rec.createdAt || Date.now();
-                                jobs.push(db.doc(APP_DOC).collection(collection).doc(rec.id).set(rec, { merge: true }));
-                            });
-                        }
-                    });
-                    if (data.defaultCurrency) {
-                        jobs.push(db.doc(APP_DOC).collection('settings').doc('main').set({
-                            id: 'main',
-                            defaultCurrency: data.defaultCurrency,
-                            defaultUnit: data.defaultUnit,
-                            defaultProduct: data.defaultProduct,
-                            updatedAt: Date.now()
-                        }, { merge: true }));
-                    }
-                    if (jobs.length) await Promise.all(jobs);
-                    console.log('Legacy data migrated to subcollections:', jobs.length, 'records');
-                }
-            } catch (error) {
-                const code = error && error.code;
-                if (code === 'permission-denied' || code === 'not-found') {
-                    // Legacy doc is not accessible or doesn't exist — nothing to migrate, skip permanently
-                    console.warn('Legacy data migration skipped:', code);
-                    state.migrated = true;
-                } else {
-                    // Transient error (network, quota, etc.) — retry next time
-                    console.error('Legacy migration failed:', error);
-                    state.migrated = false;
-                }
-            }
-            saveState(true);
         }
 
         // Reject if a Firestore request never settles (rare but possible on slow/blocked networks)
@@ -3595,6 +4205,15 @@
 
             const queue = state.syncQueue.slice();
             if (queue.length === 0) { showToast('هیڅ نوی معلومات نشته'); return; }
+            if (state.currentRole === 'viewer') {
+                showToast('تاسو یوازې لیدلای شئ');
+                return;
+            }
+            const forbiddenForMain = ['accounts', 'stockBalances', 'moneyBalances', 'transactions', 'deletedTransactions', 'editHistory'];
+            if (state.currentRole === 'main' && queue.some(q => forbiddenForMain.includes(q.collection))) {
+                showToast('مین حساب یوازې تنظیمات بدلولای شي');
+                return;
+            }
 
             isSyncing = true;
             updateSyncIndicator();
@@ -3617,12 +4236,21 @@
                 // Build write payloads
                 const writes = [];
                 queue.forEach(item => {
-                    const rec = getQueueRecord(item.collection, item.id);
+                    const rec = getQueueRecord(item);
                     if (!rec) return;
+                    let ref;
+                    if (item.collection === 'branches') {
+                        ref = db.doc(APP_DOC).collection('branches').doc(item.id);
+                    } else {
+                        if (!item.branchId) return;
+                        ref = item.collection === 'settings'
+                            ? getBranchCollectionRef(item.branchId, 'settings').doc('main')
+                            : getBranchCollectionRef(item.branchId, item.collection).doc(item.id);
+                    }
                     writes.push({
-                        ref: db.doc(APP_DOC).collection(item.collection).doc(item.id),
+                        ref: ref,
                         data: sanitizeData(rec),
-                        key: item.collection + '|' + item.id
+                        key: item.collection + '|' + (item.branchId || '') + '|' + item.id
                     });
                 });
                 if (writes.length === 0) throw new Error('Nothing to write');
@@ -3639,7 +4267,9 @@
                         await withTimeout(batch.commit(), 20000);
                 }
                 // Remove only the items that were written; keep any that were queued mid-sync
-                state.syncQueue = state.syncQueue.filter(q => !writtenKeys.has(q.collection + '|' + q.id));
+                state.syncQueue = state.syncQueue.filter(q =>
+                    !writtenKeys.has(q.collection + '|' + (q.branchId || '') + '|' + q.id)
+                );
                 state.lastSyncedAt = Date.now();
                 saveState(true);
                 showToast('همغږي شول - ' + syncedCount + ' ریکارډونه');
@@ -3674,6 +4304,68 @@
         // Fetch records updated after the last successful fetch (by updatedAt).
         // Fetching is destructive: it overwrites local unsynced work, so the
         // user must confirm first when the sync queue is not empty.
+        async function fetchBranchesFromFirestore() {
+            const snap = await withTimeout(db.doc(APP_DOC).collection('branches').get(), 20000);
+            return snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        }
+
+        async function fetchBranchSnapshot(branchId) {
+            const data = { settings: {} };
+            for (const collection of SYNC_COLLECTIONS) {
+                const snap = await withTimeout(getBranchCollectionRef(branchId, collection).get(), 20000);
+                data[collection] = snap.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data(),
+                    branchId: branchId
+                }));
+            }
+            const settingsSnap = await withTimeout(
+                getBranchCollectionRef(branchId, 'settings').doc('main').get(),
+                20000
+            );
+            data.settings = settingsSnap.exists ? settingsSnap.data() : {};
+            return data;
+        }
+
+        function applyBranchSnapshot(data, branchId, allowSeed) {
+            SYNC_COLLECTIONS.forEach(collection => {
+                state[collection] = (data[collection] || []).map(rec => ({
+                    ...rec,
+                    branchId: branchId === 'all' ? (rec.branchId || branchId) : branchId
+                }));
+            });
+            const settings = data.settings || {};
+            state.defaultCurrency = settings.defaultCurrency || 'PKR';
+            state.defaultUnit = settings.defaultUnit || (state.units.find(u => !u.isDeleted) || {}).id || 'kg';
+            state.defaultProduct = settings.defaultProduct || (state.products.find(p => !p.isDeleted) || {}).id || 'rice';
+            ensureStateDefaults(!!allowSeed, branchId);
+        }
+
+        async function buildAllBranchesSnapshot() {
+            const branches = (state.branches || []).filter(b => b.active !== false);
+            const combined = { settings: {} };
+            SYNC_COLLECTIONS.forEach(collection => { combined[collection] = []; });
+            const settingsByBranch = {};
+
+            for (const branch of branches) {
+                const data = await fetchBranchSnapshot(branch.id);
+                settingsByBranch[branch.id] = data.settings || {};
+                SYNC_COLLECTIONS.forEach(collection => {
+                    combined[collection].push(...(data[collection] || []));
+                });
+            }
+
+            const firstBranch = branches[0];
+            const firstSettings = firstBranch ? (settingsByBranch[firstBranch.id] || {}) : {};
+            combined.settings = {
+                defaultCurrency: firstSettings.defaultCurrency || 'PKR',
+                defaultUnit: firstSettings.defaultUnit || '',
+                defaultProduct: firstSettings.defaultProduct || ''
+            };
+            state.branchSettings = settingsByBranch;
+            return combined;
+        }
+
         async function fetchFromFirebase(confirmed) {
             if (isSyncing || isFetching) return;
             if (!isOnline) { showToast('آفلاین - له انټرنټ سره وصل شئ'); return; }
@@ -3700,47 +4392,42 @@
             isFetching = true;
             updateSyncIndicator();
 
-            const lastFetch = state.lastFetch || 0;
             let totalFetched = 0;
             const perType = {};
             let success = false;
             try {
-                await migrateLegacyData();
-                const serverNow = await getServerTimeMillis();
-
-                // Download everything first. Local state is only replaced after
-                // every collection succeeded, so a network failure halfway
-                // through cannot leave a half-replaced app.
-                const fetchedData = {};
-                for (const collection of SYNC_COLLECTIONS) {
-                    const snap = await withTimeout(db.doc(APP_DOC).collection(collection).get(), 20000);
-                    const fetched = [];
-                    snap.forEach(doc => { fetched.push({ id: doc.id, ...doc.data() }); });
-                    fetchedData[collection] = fetched;
+                if (state.currentRole === 'main') {
+                    if (isOnline) state.branches = await fetchBranchesFromFirestore();
+                    if (state.currentBranchId === 'all') {
+                        const data = await buildAllBranchesSnapshot();
+                        applyBranchSnapshot(data, 'all', false);
+                    } else {
+                        const branchId = state.currentBranchId || ((state.branches[0] || {}).id);
+                        if (!branchId) throw new Error('هیڅ برخه نشته');
+                        const data = await fetchBranchSnapshot(branchId);
+                        applyBranchSnapshot(data, branchId, true);
+                        state.currentBranchId = branchId;
+                    }
+                } else {
+                    const branchId = state.currentBranchId;
+                    if (!branchId) throw new Error('برخه ونه مومل شوه');
+                    const data = await fetchBranchSnapshot(branchId);
+                    applyBranchSnapshot(data, branchId, state.currentRole !== 'viewer');
                 }
-                const settingsSnap = await withTimeout(db.doc(APP_DOC).collection('settings').get(), 20000);
-                const fetchedSettings = [];
-                settingsSnap.forEach(doc => fetchedSettings.push(doc.data()));
+
+                SYNC_COLLECTIONS.forEach(collection => {
+                    perType[collection] = (state[collection] || []).length;
+                    totalFetched += perType[collection];
+                });
 
                 // Remote state is now the source of truth.
-                SYNC_COLLECTIONS.forEach(collection => {
-                    state[collection] = [];
-                    const applied = applyFetchedCollection(collection, fetchedData[collection] || []);
-                    perType[collection] = applied;
-                    totalFetched += applied;
-                });
-                fetchedSettings.forEach(data => applyFetchedSettings(data));
-                ensureStateDefaults();
-
-                // Drop any locally queued changes so they cannot overwrite
-                // what we just fetched.
                 state.syncQueue = [];
-                // Keep a small safety margin for device/server clock skew.
-                state.lastFetch = serverNow - 10000;
+                state.lastFetch = Date.now();
                 saveState(true);
                 renderAll();
+                renderBranchChips();
                 success = true;
-                console.log('Fetched from Firebase at', new Date().toLocaleTimeString(), '| previous lastFetch:', new Date(lastFetch).toLocaleString());
+                console.log('Fetched from Firebase at', new Date().toLocaleTimeString());
             } catch (error) {
                 console.error('Fetch from Firebase failed:', error);
                 showToast('راووړل ناکامه شوه - ' + (error && error.message ? error.message : 'بیا هڅه وکړئ'));
@@ -3748,6 +4435,35 @@
                 isFetching = false;
                 updateSyncIndicator();
                 if (success) showFetchResultModal(totalFetched, perType);
+            }
+        }
+
+        async function loadBranchView(branchId) {
+            if (state.currentRole !== 'main' || isSyncing || isFetching) return;
+            if (!isOnline) { showToast('آفلاین - د برخې بدلولو لپاره انټرنټ ته وصل شئ'); return; }
+
+            isFetching = true;
+            updateSyncIndicator();
+            try {
+                if (branchId === 'all') {
+                    state.branches = await fetchBranchesFromFirestore();
+                    const data = await buildAllBranchesSnapshot();
+                    applyBranchSnapshot(data, 'all', false);
+                } else {
+                    const data = await fetchBranchSnapshot(branchId);
+                    applyBranchSnapshot(data, branchId, true);
+                }
+                state.currentBranchId = branchId;
+                state.lastFetch = Date.now();
+                saveState(true);
+                renderAll();
+                renderBranchChips();
+            } catch (error) {
+                console.error('Branch view load failed:', error);
+                showToast('برخه نه شوه لوستل شوې - ' + (error && error.message ? error.message : 'بیا هڅه وکړئ'));
+            } finally {
+                isFetching = false;
+                updateSyncIndicator();
             }
         }
 
@@ -3772,8 +4488,48 @@
             document.getElementById('fetchResultModal').classList.remove('active');
         }
 
+        function applyPermissionUI() {
+            const businessWriter = canWriteBusinessData();
+            const settingsWriter = canManageSettings() && state.currentBranchId && state.currentBranchId !== 'all';
+
+            const addFab = document.getElementById('addAccountFab');
+            if (addFab) addFab.style.display = businessWriter ? 'flex' : 'none';
+
+            const quickActions = document.getElementById('quickActions');
+            if (quickActions) quickActions.style.display = businessWriter ? '' : 'none';
+
+            if (!businessWriter) {
+                ['buyForm', 'sellForm', 'transferForm', 'moneyForm'].forEach(id => {
+                    const form = document.getElementById(id);
+                    if (form) form.classList.remove('active');
+                });
+            }
+
+            const stockButtons = document.getElementById('stockButtons');
+            const moneyButtons = document.getElementById('moneyButtons');
+            if (stockButtons) stockButtons.style.display = (businessWriter && currentTransactionSubTab === 'stock') ? 'flex' : 'none';
+            if (moneyButtons) moneyButtons.style.display = (businessWriter && currentTransactionSubTab === 'money') ? 'flex' : 'none';
+
+            const syncBtn = document.getElementById('syncBtn');
+            if (syncBtn) syncBtn.style.display = state.currentRole === 'viewer' ? 'none' : '';
+
+            ['settingsDefaultCurrency', 'settingsProducts', 'settingsUnits'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.toggle('disabled', !settingsWriter);
+            });
+            ['settingsImport', 'settingsClear'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.toggle('disabled', !businessWriter);
+            });
+            const exportEl = document.getElementById('settingsExport');
+            if (exportEl) exportEl.classList.toggle('disabled', !state.currentRole);
+        }
+
         function renderAll() {
             updateSyncIndicator();
+            renderBranchChips();
+            renderBranchesSettings();
+            applyPermissionUI();
             renderDashboard();
             renderAccounts();
             if (currentTransactionSubTab === 'money') {
@@ -3955,6 +4711,7 @@
         let longPressFired = false;
 
         function startLongPress(e, accountId, subTab) {
+            if (!canWriteBusinessData()) return;
             longPressFired = false;
             if (longPressTimer) clearTimeout(longPressTimer);
             longPressTimer = setTimeout(() => {
@@ -3975,7 +4732,112 @@
                 longPressFired = false;
                 return;
             }
-            openLedgerModal(accountId, subTab);
+            openLedgerView(accountId, subTab);
+        }
+
+        async function resolveUserBranch(user) {
+            const email = user && user.email ? user.email : '';
+            const normalized = String(email || '').toLowerCase();
+            let branch = (state.branches || []).find(b =>
+                String(b.email || '').toLowerCase() === normalized
+            );
+
+            if (isOnline && user && user.uid) {
+                // Preferred path: a UID -> branch mapping. This avoids exposing
+                // the whole branches collection to branch users.
+                try {
+                    const mapSnap = await withTimeout(
+                        db.doc(APP_DOC).collection('branchUsers').doc(user.uid).get(),
+                        20000
+                    );
+                    if (mapSnap.exists && mapSnap.data().branchId) {
+                        const mappedBranchId = mapSnap.data().branchId;
+                        const branchSnap = await withTimeout(
+                            getBranchDocRef(mappedBranchId).get(),
+                            20000
+                        );
+                        if (branchSnap.exists) {
+                            return { id: branchSnap.id, ...branchSnap.data() };
+                        }
+                        // The mapping exists but the branch is gone. Block the
+                        // login instead of silently treating it as main.
+                        return { id: mappedBranchId, active: false, role: 'viewer' };
+                    }
+                } catch (error) {
+                    console.warn('Branch UID lookup failed:', error);
+                }
+            }
+
+            if (isOnline) {
+                try {
+                    const snap = await withTimeout(
+                        db.doc(APP_DOC).collection('branches').where('email', '==', normalized).get(),
+                        20000
+                    );
+                    if (!snap.empty) {
+                        const doc = snap.docs[0];
+                        branch = { id: doc.id, ...doc.data() };
+                    }
+                } catch (error) {
+                    console.warn('Branch email lookup failed:', error);
+                }
+            }
+            return branch || null;
+        }
+
+        async function initializeSessionAfterAuth(user, explicitLogin) {
+            state.currentUser = {
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName || String(user.email || '').split('@')[0]
+            };
+
+            const branch = await resolveUserBranch(user);
+            if (branch && branch.active === false) {
+                try { await auth.signOut(); } catch (e) {}
+                throw new Error('دا برخه غیر فعاله ده');
+            }
+
+            if (branch) {
+                state.currentRole = branch.role === 'viewer' ? 'viewer' : 'admin';
+                state.currentBranchId = branch.id;
+                state.branches = [branch];
+            } else {
+                state.currentRole = 'main';
+                state.currentBranchId = 'all';
+                if (isOnline) {
+                    try {
+                        state.branches = await fetchBranchesFromFirestore();
+                    } catch (error) {
+                        console.warn('Could not load branches:', error);
+                        if (!Array.isArray(state.branches)) state.branches = [];
+                    }
+                }
+            }
+
+            state.loginStatus = true;
+            state.syncQueue = [];
+
+            if (isOnline) {
+                try {
+                    if (state.currentRole === 'main') {
+                        const data = await buildAllBranchesSnapshot();
+                        applyBranchSnapshot(data, 'all', false);
+                    } else {
+                        const data = await fetchBranchSnapshot(state.currentBranchId);
+                        applyBranchSnapshot(data, state.currentBranchId, state.currentRole !== 'viewer');
+                    }
+                    state.lastFetch = Date.now();
+                } catch (error) {
+                    console.warn('Initial branch data load failed:', error);
+                    if (explicitLogin) {
+                        // Never show another branch's cached business data.
+                        SYNC_COLLECTIONS.forEach(collection => { state[collection] = []; });
+                    }
+                }
+            }
+
+            saveState(true);
         }
 
         async function handleLogin() {
@@ -3993,16 +4855,12 @@
                 const userCredential = await auth.signInWithEmailAndPassword(email, password);
                 const user = userCredential.user;
                 persistEnabled = true;
-                state.currentUser = {
-                    uid: user.uid,
-                    email: user.email,
-                    displayName: user.displayName || email.split('@')[0]
-                };
-                state.loginStatus = true;
-                saveState();
+                await initializeSessionAfterAuth(user, true);
                 isForceLogin = false;
                 closeLoginModal();
                 renderAll();
+                renderBranchChips();
+                renderBranchesSettings();
                 renderFirebaseAccountUI();
                 updateSyncIndicator();
                 showToast('خوش آمدید ' + (state.currentUser.displayName || ''));
@@ -4017,6 +4875,7 @@
             // This happens even if the network sign-out fails, and the UI is
             // updated immediately.
             persistEnabled = false;
+            if (isLedgerViewOpen()) closeLedgerView(true);
             resetState();
             localStorage.removeItem(APP_STORAGE_KEY);
             isForceLogin = true;
@@ -4036,6 +4895,12 @@
             if (!container) return;
 
             if (state.currentUser) {
+                const roleLabel = state.currentRole === 'main'
+                    ? 'مین حساب'
+                    : (state.currentRole === 'viewer' ? 'یوازې لیدونکی' : 'برخه کارن');
+                const branchLabel = state.currentRole === 'main'
+                    ? 'ټولې برخې'
+                    : (getBranchName(state.currentBranchId) || 'برخه');
                 container.innerHTML = `
                     <div class="settings-item">
                         <div class="settings-icon firebase">
@@ -4045,7 +4910,7 @@
                         </div>
                         <div class="settings-text">
                             <div class="settings-label">${escapeHtml(state.currentUser.displayName || state.currentUser.email)}</div>
-                            <div class="settings-desc">${escapeHtml(state.currentUser.email)}</div>
+                            <div class="settings-desc">${escapeHtml(state.currentUser.email)} · ${escapeHtml(roleLabel)} · ${escapeHtml(branchLabel)}</div>
                         </div>
                     </div>
                     <div class="settings-item" onclick="handleLogout()">
@@ -4091,7 +4956,16 @@
                         email: user.email,
                         displayName: user.displayName || user.email.split('@')[0]
                     };
-                    saveState();
+                    if (!state.currentRole) {
+                        initializeSessionAfterAuth(user, false).then(() => {
+                            renderAll();
+                            renderBranchChips();
+                            renderBranchesSettings();
+                            saveState(true);
+                        }).catch(error => console.warn('Could not initialize branch context:', error));
+                    } else {
+                        saveState();
+                    }
                 }
             } else if (state.loginStatus || state.currentUser) {
                 // The Firebase session expired or was revoked. Lock the app
@@ -4127,6 +5001,12 @@
 
         // Switch tabs
         function switchTab(tabId) {
+            // Leaving the Accounts tab while the ledger is open should also
+            // restore the bottom navigation and any moved transaction form.
+            if (tabId !== 'tab-accounts' && isLedgerViewOpen()) {
+                closeLedgerView(true);
+            }
+
             document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
 
@@ -4136,6 +5016,8 @@
             if (tabId === 'tab-dashboard') {
                 renderDashboard();
             } else if (tabId === 'tab-accounts') {
+                // Tapping the Accounts tab always returns to the account list.
+                if (isLedgerViewOpen()) closeLedgerView(true);
                 renderAccounts();
             } else if (tabId === 'tab-transactions') {
                 if (currentTransactionSubTab === 'money') {
@@ -4146,6 +5028,7 @@
             } else if (tabId === 'tab-all-transactions') {
                 initAllTransactionsTab();
             } else if (tabId === 'tab-settings') {
+                renderBranchesSettings();
                 updateSettingsCounts();
                 updateProductsCountDisplay();
                 updateUnitsCountDisplay();
@@ -4221,6 +5104,11 @@
             const container = document.getElementById('accountList');
             if (!container) return;
 
+            // Keep an open ledger in sync when data refreshes in the background.
+            if (isLedgerViewOpen() && currentLedgerPartyId) {
+                renderLedger();
+            }
+
             let accounts = state.accounts.filter(a => !a.isDeleted);
 
             // Hide customers in stock sub-tab
@@ -4259,7 +5147,12 @@
                     const subTab = currentAccountSubTab;
                     const touchHandlers = `onclick="onAccountClick(event,'${id}','${subTab}')" ontouchstart="startLongPress(event,'${id}','${subTab}')" ontouchend="cancelLongPress(event)" ontouchmove="cancelLongPress(event)" onmousedown="startLongPress(event,'${id}','${subTab}')" onmouseup="cancelLongPress(event)" onmouseleave="cancelLongPress(event)"`;
                     const avatar = `<div class="account-avatar ${escapeHtml(a.type)}">${escapeHtml((a.name || '?').charAt(0))}</div>`;
-                    const info = `<div class="account-info"><div class="account-name">${escapeHtml(a.name)}</div><div class="account-phone">${escapeHtml(a.phone || '')}</div></div>`;
+                    const locationLabel = a.location ? ` - ${escapeHtml(a.location)}` : '';
+                    const branchLabel = (isMainAccount() && state.currentBranchId === 'all' && a.branchId)
+                        ? getBranchName(a.branchId)
+                        : '';
+                    const metaText = [a.phone || '', branchLabel].filter(Boolean).join(' · ');
+                    const info = `<div class="account-info"><div class="account-name">${escapeHtml(a.name)}${locationLabel}</div><div class="account-phone">${escapeHtml(metaText)}</div></div>`;
 
                     if (currentAccountSubTab === 'money') {
                         // Read the real balances so an account that only uses a
@@ -4352,12 +5245,13 @@
             });
             document.querySelector(`#tab-transactions .account-tabs .account-tab:nth-child(${tab === 'stock' ? 1 : 2})`).classList.add('active');
 
+            const canWrite = canWriteBusinessData();
             if (tab === 'stock') {
-                document.getElementById('stockButtons').style.display = 'flex';
+                document.getElementById('stockButtons').style.display = canWrite ? 'flex' : 'none';
                 document.getElementById('moneyButtons').style.display = 'none';
             } else {
                 document.getElementById('stockButtons').style.display = 'none';
-                document.getElementById('moneyButtons').style.display = 'flex';
+                document.getElementById('moneyButtons').style.display = canWrite ? 'flex' : 'none';
             }
 
             // Previously the list was not re-rendered on sub-tab changes.
@@ -4384,6 +5278,7 @@
         let currentLedgerCurrency = null;
         let currentLedgerProduct = null;
         let currentLedgerUnit = null;
+        let ledgerFormContext = null;
 
         function getAccountMoneyCurrencies(accountId) {
             const currencies = new Set();
@@ -4420,7 +5315,12 @@
             );
         }
 
-        function openLedgerModal(accountId, type, preSelectedCurrency = null, preSelectedProduct = null, preSelectedUnit = null) {
+        function isLedgerViewOpen() {
+            const view = document.getElementById('accountLedgerView');
+            return !!(view && view.classList.contains('active'));
+        }
+
+        function openLedgerView(accountId, type, preSelectedCurrency = null, preSelectedProduct = null, preSelectedUnit = null) {
             currentLedgerPartyId = accountId;
             currentLedgerType = type;
 
@@ -4453,12 +5353,23 @@
                 }
             }
 
-            const modal = document.getElementById('ledgerModal');
-            const title = document.getElementById('ledgerModalTitle');
-            const account = getAccountById(accountId);
-            title.textContent = 'لیجر - ' + (account ? account.name : '');
+            if (ledgerFormContext) exitLedgerForm(true);
+
+            const listView = document.getElementById('accountsListView');
+            const ledgerView = document.getElementById('accountLedgerView');
+            const pageTitle = document.getElementById('accountsPageTitle');
+            const bottomNav = document.querySelector('.bottom-nav');
+            if (listView) listView.classList.add('hidden');
+            if (pageTitle) pageTitle.classList.add('hidden');
+            if (ledgerView) ledgerView.classList.add('active');
+            if (bottomNav) bottomNav.classList.add('hidden');
             renderLedger();
-            modal.classList.add('active');
+            updateLedgerActionBars();
+
+            // Bring the ledger to the top, especially on mobile where the
+            // account list may have been scrolled down.
+            const main = document.querySelector('.main-content');
+            if (main) main.scrollTop = 0;
         }
 
         function openLedgerCurrencyModal(accountId) {
@@ -4496,24 +5407,234 @@
 
         function selectLedgerProduct(accountId, productId, unitId) {
             closeLedgerProductModal();
-            openLedgerModal(accountId, 'stock', null, productId, unitId);
+            openLedgerView(accountId, 'stock', null, productId, unitId);
         }
 
         function selectLedgerCurrency(accountId, currency) {
             closeLedgerCurrencyModal();
-            openLedgerModal(accountId, 'money', currency);
+            openLedgerView(accountId, 'money', currency);
         }
 
-        function closeLedgerModal() {
-            document.getElementById('ledgerModal').classList.remove('active');
+        function closeLedgerView(quiet = false) {
+            if (ledgerFormContext) exitLedgerForm(true);
+
+            const listView = document.getElementById('accountsListView');
+            const ledgerView = document.getElementById('accountLedgerView');
+            const pageTitle = document.getElementById('accountsPageTitle');
+            const bottomNav = document.querySelector('.bottom-nav');
+            if (ledgerView) ledgerView.classList.remove('active');
+            if (listView) listView.classList.remove('hidden');
+            if (pageTitle) pageTitle.classList.remove('hidden');
+            if (bottomNav) bottomNav.classList.remove('hidden');
+            updateLedgerActionBars();
             currentLedgerPartyId = null;
             currentLedgerType = null;
             currentLedgerCurrency = null;
             currentLedgerProduct = null;
             currentLedgerUnit = null;
+
+            if (!quiet) {
+                renderAccounts();
+                const main = document.querySelector('.main-content');
+                if (main) main.scrollTop = 0;
+            }
+        }
+
+        function updateLedgerActionBars() {
+            const show = isLedgerViewOpen() && !ledgerFormContext && canWriteBusinessData();
+            const stockBar = document.getElementById('ledgerStockActions');
+            const moneyBar = document.getElementById('ledgerMoneyActions');
+            if (stockBar) stockBar.classList.toggle('active', show && currentLedgerType === 'stock');
+            if (moneyBar) moneyBar.classList.toggle('active', show && currentLedgerType === 'money');
+        }
+
+        function handleLedgerBack() {
+            if (ledgerFormContext) {
+                requestCloseLedgerForm();
+                return;
+            }
+            closeLedgerView();
+        }
+
+        function getLedgerFormId(kind) {
+            if (kind === 'buy') return 'buyForm';
+            if (kind === 'sell') return 'sellForm';
+            if (kind === 'transfer') return 'transferForm';
+            return 'moneyForm';
+        }
+
+        function setLedgerFormProductUnit(prefix, updateLabels, updateTotal) {
+            const productSelect = document.getElementById(prefix + 'Product');
+            const unitSelect = document.getElementById(prefix + 'Unit');
+            if (productSelect && currentLedgerProduct) {
+                const hasProduct = Array.from(productSelect.options).some(opt => opt.value === currentLedgerProduct);
+                if (hasProduct) productSelect.value = currentLedgerProduct;
+            }
+            if (unitSelect && currentLedgerUnit) {
+                const hasUnit = Array.from(unitSelect.options).some(opt => opt.value === currentLedgerUnit);
+                if (hasUnit) unitSelect.value = currentLedgerUnit;
+            }
+            if (typeof updateLabels === 'function') updateLabels();
+            if (typeof updateTotal === 'function') updateTotal();
+        }
+
+        function prefillLedgerForm(kind, account) {
+            const name = account.name || '';
+            if (kind === 'buy') {
+                document.getElementById('buyAccount').value = account.id;
+                document.getElementById('buyAccountSearch').value = name;
+                setLedgerFormProductUnit('buy', updateBuyFormUnitLabels, updateBuyTotal);
+            } else if (kind === 'sell') {
+                // The stock ledger belongs to a supplier/mill, so that account
+                // is the source. Customers are chosen separately.
+                document.getElementById('sellFromAccount').value = account.id;
+                document.getElementById('sellFromAccountSearch').value = name;
+                setLedgerFormProductUnit('sell', updateSellFormUnitLabels, updateSellTotal);
+            } else if (kind === 'transfer') {
+                document.getElementById('transferFrom').value = account.id;
+                document.getElementById('transferFromSearch').value = name;
+                setLedgerFormProductUnit('transfer', updateTransferFormUnitLabels);
+            } else {
+                const moneyForm = document.getElementById('moneyForm');
+                if (moneyForm) moneyForm.classList.add('ledger-context');
+                const accountLabel = document.getElementById('moneyFormAccountName');
+                if (accountLabel) {
+                    accountLabel.textContent = name;
+                    accountLabel.hidden = false;
+                }
+                document.getElementById('moneyParty').value = account.id;
+                document.getElementById('moneyPartySearch').value = name;
+                const currency = currentLedgerCurrency || state.defaultCurrency;
+                currentMoneyCurrency = currency;
+                const currencySelect = document.getElementById('moneyCurrency');
+                if (currencySelect) currencySelect.value = currency;
+            }
+        }
+
+        function snapshotLedgerForm(form) {
+            const fields = Array.from(form.querySelectorAll('input, select, textarea')).map(el => {
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                    return el.type + ':' + (el.checked ? '1' : '0');
+                }
+                return el.type + ':' + (el.value || '');
+            });
+            // The money form's جمع/بنام selection is kept in JS, not in an
+            // input, so include it explicitly in the dirty check.
+            if (form.id === 'moneyForm') fields.push('moneyType:' + currentMoneyType);
+            return fields.join('|');
+        }
+
+        function ledgerFormIsDirty() {
+            if (!ledgerFormContext) return false;
+            return snapshotLedgerForm(ledgerFormContext.form) !== ledgerFormContext.snapshot;
+        }
+
+        function openLedgerTransactionForm(kind) {
+            if (!isLedgerViewOpen() || !currentLedgerPartyId || ledgerFormContext) return;
+            const account = getAccountById(currentLedgerPartyId);
+            if (!account) return;
+
+            if (kind === 'buy') openBuyForm();
+            else if (kind === 'sell') openSellForm();
+            else if (kind === 'transfer') openTransferForm();
+            else if (kind === 'credit') openMoneyForm('send');
+            else if (kind === 'debit') openMoneyForm('receive');
+            else return;
+
+            const formId = getLedgerFormId(kind);
+            const form = document.getElementById(formId);
+            const host = document.getElementById('ledgerFormSection');
+            const content = document.getElementById('ledgerContent');
+            if (!form || !host) return;
+
+            prefillLedgerForm(kind, account);
+
+            host.appendChild(form);
+            host.classList.add('active');
+            if (content) content.style.display = 'none';
+
+            ledgerFormContext = {
+                kind: kind,
+                formId: formId,
+                form: form,
+                snapshot: snapshotLedgerForm(form)
+            };
+            updateLedgerActionBars();
+
+            const main = document.querySelector('.main-content');
+            if (main) main.scrollTop = 0;
+        }
+
+        function exitLedgerForm(skipRender = false) {
+            if (!ledgerFormContext) return;
+            const form = ledgerFormContext.form;
+            const tab = document.getElementById('tab-transactions');
+            const anchor = document.getElementById('transactionList');
+
+            if (tab) {
+                if (anchor) tab.insertBefore(form, anchor);
+                else tab.appendChild(form);
+            }
+            form.classList.remove('active');
+
+            const host = document.getElementById('ledgerFormSection');
+            if (host) host.classList.remove('active');
+            const content = document.getElementById('ledgerContent');
+            if (content) content.style.display = '';
+
+            ledgerFormContext = null;
+            updateLedgerActionBars();
+
+            if (!skipRender && isLedgerViewOpen() && currentLedgerPartyId) {
+                renderLedger();
+            }
+        }
+
+        function requestCloseLedgerForm() {
+            if (!ledgerFormContext) return;
+            if (ledgerFormIsDirty()) {
+                openConfirmModal(
+                    'بیرته تلل',
+                    'ستاسو لیکل شوي معلومات لا خوندي شوي نه دي. آیا ډاډه یاست چې بیرته لاړ شئ؟',
+                    () => {
+                        closeConfirmModal();
+                        exitLedgerForm();
+                    }
+                );
+                return;
+            }
+            exitLedgerForm();
+        }
+
+        function restoreLedgerFormIfNeeded(form) {
+            if (ledgerFormContext && ledgerFormContext.form === form) {
+                exitLedgerForm();
+            }
+        }
+
+        function requestCloseBuyForm() {
+            if (ledgerFormContext && ledgerFormContext.formId === 'buyForm') requestCloseLedgerForm();
+            else closeBuyForm();
+        }
+
+        function requestCloseSellForm() {
+            if (ledgerFormContext && ledgerFormContext.formId === 'sellForm') requestCloseLedgerForm();
+            else closeSellForm();
+        }
+
+        function requestCloseTransferForm() {
+            if (ledgerFormContext && ledgerFormContext.formId === 'transferForm') requestCloseLedgerForm();
+            else closeTransferForm();
+        }
+
+        function requestCloseMoneyForm() {
+            if (ledgerFormContext && ledgerFormContext.formId === 'moneyForm') requestCloseLedgerForm();
+            else closeMoneyForm();
         }
 
         function cleanupOldLogs() {
+            if (!canWriteBusinessData()) return;
+
             const sixtyDaysAgo = Date.now() - (60 * 24 * 60 * 60 * 1000);
             const oldDeleted = state.deletedTransactions.filter(d => !(d.deletedAt > sixtyDaysAgo));
             const oldEdits = state.editHistory.filter(h => !(h.editedAt > sixtyDaysAgo));
@@ -4523,15 +5644,17 @@
             state.editHistory = state.editHistory.filter(h => h.editedAt > sixtyDaysAgo);
 
             oldDeleted.forEach(d => {
-                removeFromQueue('deletedTransactions', d.id);
-                if (isOnline && state.currentUser) {
-                    db.doc(APP_DOC).collection('deletedTransactions').doc(d.id).delete().catch(() => {});
+                const branchId = d.branchId || state.currentBranchId;
+                removeFromQueue('deletedTransactions', d.id, branchId);
+                if (isOnline && state.currentUser && branchId && branchId !== 'all') {
+                    getBranchCollectionRef(branchId, 'deletedTransactions').doc(d.id).delete().catch(() => {});
                 }
             });
             oldEdits.forEach(h => {
-                removeFromQueue('editHistory', h.id);
-                if (isOnline && state.currentUser) {
-                    db.doc(APP_DOC).collection('editHistory').doc(h.id).delete().catch(() => {});
+                const branchId = h.branchId || state.currentBranchId;
+                removeFromQueue('editHistory', h.id, branchId);
+                if (isOnline && state.currentUser && branchId && branchId !== 'all') {
+                    getBranchCollectionRef(branchId, 'editHistory').doc(h.id).delete().catch(() => {});
                 }
             });
 
@@ -4694,8 +5817,17 @@
                 const mainName = escapeHtml(mainAccount ? mainAccount.name : '');
                 const transferName = escapeHtml(transferAccount ? transferAccount.name : '');
                 const isMainAccount = t.accountId === viewingAccountId;
+                const isCredit = t.moneyType === 'credit' || t.moneyType === 'receive';
 
-                if (t.moneyType === 'credit' || t.moneyType === 'receive') {
+                // A money transaction without a transfer account is a cash
+                // entry. Show "جمع نقد" / "بنام نقد" when no note was written
+                // instead of leaving an empty "ټو" / "از" phrase.
+                if (!t.toAccountId) {
+                    const label = isCredit ? 'جمع' : 'بنام';
+                    return notes ? `${label}${notePart}` : `${label} نقد`;
+                }
+
+                if (isCredit) {
                     if (isMainAccount) {
                         return `جمع${notePart} ټو ${transferName}`;
                     } else {
@@ -4859,6 +5991,7 @@
 
             const display = ascending.slice().reverse();
             const balance = roundTo(totalIn - totalOut, 3);
+            const ledgerKindLabel = currentLedgerType === 'money' ? 'حساب کهاته' : 'مال کهاته';
 
             let html = `
                 <div class="ledger-header">
@@ -4868,7 +6001,11 @@
                         </div>
                         <div class="ledger-party-info">
                             <div class="ledger-party-name">${escapeHtml(account.name)}</div>
-                            <div class="ledger-party-type">${account.type === 'supplier' ? 'سپلایر' : account.type === 'mill' ? 'میل' : 'ګراک'}</div>
+                            <div class="ledger-party-type">
+                                <span>${account.type === 'supplier' ? 'سپلایر' : account.type === 'mill' ? 'میل' : 'ګراک'}</span>
+                                <span class="ledger-kind-label">${escapeHtml(ledgerKindLabel)}</span>
+                                ${(isMainAccount() && state.currentBranchId === 'all' && account.branchId) ? `<span class="ledger-kind-label">${escapeHtml(getBranchName(account.branchId))}</span>` : ''}
+                            </div>
                         </div>
                     </div>
                     <div class="ledger-summary-row">
@@ -4906,18 +6043,19 @@
                         <div class="ledger-item-balance ${e.balance >= 0 ? 'positive' : 'negative'}">
                             ${balancePrefix}${formatNumber(e.balance)}
                         </div>
+                        ${canWriteBusinessData() ? `
                         <div class="ledger-item-actions">
-                            <button class="ledger-btn edit" onclick="closeLedgerModal(); openAllTransEditModal('${escapeHtml(t.id)}')">
+                            <button class="ledger-btn edit" onclick="closeLedgerView(); openAllTransEditModal('${escapeHtml(t.id)}')">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
                                 </svg>
                             </button>
-                            <button class="ledger-btn delete" onclick="closeLedgerModal(); openAllTransDeleteConfirm('${escapeHtml(t.id)}')">
+                            <button class="ledger-btn delete" onclick="closeLedgerView(); openAllTransDeleteConfirm('${escapeHtml(t.id)}')">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
                                 </svg>
                             </button>
-                        </div>
+                        </div>` : ''}
                     </div>
                 `;
             });
@@ -5079,7 +6217,10 @@
 
         function createAllTransItemHTML(t) {
             const ledgerType = currentAllTransSubTab === 'money' ? 'money' : 'stock';
-            const note = generateLedgerNote(t, t.accountId, ledgerType);
+            const branchSuffix = (isMainAccount() && state.currentBranchId === 'all' && t.branchId)
+                ? ` · ${escapeHtml(getBranchName(t.branchId))}`
+                : '';
+            const note = generateLedgerNote(t, t.accountId, ledgerType) + branchSuffix;
             let amount = 0;
             let isPositive = true;
             let amountPrefix = '+';
@@ -5122,6 +6263,7 @@
                     <div class="ledger-item-amount ${amountClass}">
                         ${amountPrefix}${formatNumber(Math.abs(amount))}
                     </div>
+                    ${canWriteBusinessData() ? `
                     <div class="ledger-item-actions">
                         <button class="ledger-btn edit" onclick="openAllTransEditModal('${escapeHtml(t.id)}')">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -5133,7 +6275,7 @@
                                 <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
                             </svg>
                         </button>
-                    </div>
+                    </div>` : ''}
                 </div>
             `;
         }
@@ -5142,6 +6284,7 @@
         let currentAllTransMoneyType = 'credit';
 
         function openAllTransEditModal(id) {
+            if (!canWriteBusinessData()) { showToast('تاسو د بدلون اجازه نلرئ'); return; }
             const t = state.transactions.find(t => t.id === id);
             if (!t || t.isDeleted) return;
 
@@ -5178,6 +6321,7 @@
         }
 
         function openAllTransDeleteConfirm(id) {
+            if (!canWriteBusinessData()) { showToast('تاسو د بدلون اجازه نلرئ'); return; }
             currentAllTransEditId = id;
             openConfirmModal('معامله لغوه کول', 'تاسو کول شي چې دا معامله لغوه کړئ؟', () => {
                 performAllTransDelete(id);
@@ -5192,6 +6336,7 @@
         }
 
         function performAllTransDelete(id) {
+            if (!guardBusinessWrite()) return;
             const t = state.transactions.find(tr => tr.id === id);
             if (!t || t.isDeleted) return;
 
@@ -5504,6 +6649,7 @@
                 previousData: { ...oldData },
                 newData: newData,
                 editedBy: state.currentUser?.uid || 'system',
+                branchId: oldData.branchId || state.currentBranchId,
                 version: 1,
                 editedAt: Date.now()
             };
@@ -5530,6 +6676,7 @@
         }
 
         function saveAllTransEdit() {
+            if (!guardBusinessWrite()) return;
             const id = currentAllTransEditId;
             const t = state.transactions.find(x => x.id === id);
             if (!t || t.isDeleted) return;
@@ -5719,7 +6866,7 @@
             enqueueSync('transactions', id);
 
             closeAllTransEditModal();
-            if (document.getElementById('ledgerModal').classList.contains('active') && currentLedgerPartyId) {
+            if (isLedgerViewOpen() && currentLedgerPartyId) {
                 renderLedger();
             }
             showToast('معامله تصحیح شوه');
@@ -5826,6 +6973,7 @@
 
         // Transfer Form Functions
         function openBuyForm(id = null) {
+            if (!canWriteBusinessData()) { showToast('تاسو د بدلون اجازه نلرئ'); return; }
             closeSellForm();
             closeTransferForm();
             const form = document.getElementById('buyForm');
@@ -5885,6 +7033,7 @@
         }
 
         function openSellForm(id = null) {
+            if (!canWriteBusinessData()) { showToast('تاسو د بدلون اجازه نلرئ'); return; }
             closeBuyForm();
             closeTransferForm();
             const form = document.getElementById('sellForm');
@@ -5989,6 +7138,7 @@
         }
 
         function openTransferForm(id = null) {
+            if (!canWriteBusinessData()) { showToast('تاسو د بدلون اجازه نلرئ'); return; }
             closeBuyForm();
             closeSellForm();
             const form = document.getElementById('transferForm');
@@ -6045,18 +7195,25 @@
         }
 
         function closeTransferForm() {
-            document.getElementById('transferForm').classList.remove('active');
+            const form = document.getElementById('transferForm');
+            form.classList.remove('active');
+            restoreLedgerFormIfNeeded(form);
         }
 
         function closeBuyForm() {
-            document.getElementById('buyForm').classList.remove('active');
+            const form = document.getElementById('buyForm');
+            form.classList.remove('active');
+            restoreLedgerFormIfNeeded(form);
         }
 
         function closeSellForm() {
-            document.getElementById('sellForm').classList.remove('active');
+            const form = document.getElementById('sellForm');
+            form.classList.remove('active');
+            restoreLedgerFormIfNeeded(form);
         }
 
         function saveBuyTransaction() {
+            if (!guardBusinessWrite()) return;
             const id = document.getElementById('buyTransactionId').value;
             const date = document.getElementById('buyDate').value;
             const accountId = document.getElementById('buyAccount').value;
@@ -6121,6 +7278,7 @@
                     toAccountId: null,
                     parentId: null,
                     fullNote: '',
+                    branchId: state.currentBranchId,
                     version: 1,
                     createdBy: state.currentUser?.uid || 'system',
                     createdAt: Date.now(),
@@ -6152,6 +7310,7 @@
         }
 
         function saveSellTransaction() {
+            if (!guardBusinessWrite()) return;
             const id = document.getElementById('sellTransactionId').value;
             const date = document.getElementById('sellDate').value;
             const toAccountId = document.getElementById('sellCustomer').value;
@@ -6224,6 +7383,7 @@
                     notes: notes,
                     parentId: null,
                     fullNote: '',
+                    branchId: state.currentBranchId,
                     version: 1,
                     createdBy: state.currentUser?.uid || 'system',
                     createdAt: Date.now(),
@@ -6259,6 +7419,7 @@
         }
 
         function saveTransferTransaction() {
+            if (!guardBusinessWrite()) return;
             const id = document.getElementById('transferTransactionId').value;
             const date = document.getElementById('transferDate').value;
             const fromAccountId = document.getElementById('transferFrom').value;
@@ -6330,6 +7491,7 @@
                     notes: notes,
                     parentId: null,
                     fullNote: '',
+                    branchId: state.currentBranchId,
                     version: 1,
                     createdBy: state.currentUser?.uid || 'system',
                     createdAt: Date.now(),
@@ -6365,6 +7527,7 @@
         }
 
         function deleteTransferTransaction() {
+            if (!guardBusinessWrite()) return;
             const id = document.getElementById('transferTransactionId').value;
             if (id) {
                 openConfirmModal('ټرانسفر لغوه کول', 'تاسو کول شي چې دا معامله لغوه کړئ؟', () => {
@@ -6386,6 +7549,7 @@
                             originalId: id,
                             fullData: { ...transaction },
                             deletedBy: state.currentUser?.uid || 'system',
+                            branchId: transaction.branchId || state.currentBranchId,
                             version: 1,
                             deletedAt: Date.now()
                         };
@@ -6414,6 +7578,7 @@
         }
 
         function deleteBuyTransaction() {
+            if (!guardBusinessWrite()) return;
             const id = document.getElementById('buyTransactionId').value;
             if (id) {
                 openConfirmModal('رانيول لغوه کول', 'تاسو کول شي چې دا معامله لغوه کړئ؟', () => {
@@ -6432,6 +7597,7 @@
                             originalId: id,
                             fullData: { ...transaction },
                             deletedBy: state.currentUser?.uid || 'system',
+                            branchId: transaction.branchId || state.currentBranchId,
                             version: 1,
                             deletedAt: Date.now()
                         };
@@ -6460,6 +7626,7 @@
         }
 
         function deleteSellTransaction() {
+            if (!guardBusinessWrite()) return;
             const id = document.getElementById('sellTransactionId').value;
             if (id) {
                 openConfirmModal('پلورل لغوه کول', 'تاسو کول شي چې دا معامله لغوه کړئ؟', () => {
@@ -6481,6 +7648,7 @@
                             originalId: id,
                             fullData: { ...transaction },
                             deletedBy: state.currentUser?.uid || 'system',
+                            branchId: transaction.branchId || state.currentBranchId,
                             version: 1,
                             deletedAt: Date.now()
                         };
@@ -6570,8 +7738,13 @@
                 amountPrefix = '';
             }
 
+            const branchName = (isMainAccount() && state.currentBranchId === 'all' && t.branchId)
+                ? getBranchName(t.branchId)
+                : '';
+            const metaText = [t.notes || '', branchName].filter(Boolean).join(' · ');
+
             return `
-                <li class="transaction-item" onclick="openStockFormById('${escapeHtml(t.id)}', '${escapeHtml(t.type)}')">
+                <li class="transaction-item" ${canWriteBusinessData() ? `onclick="openStockFormById('${escapeHtml(t.id)}', '${escapeHtml(t.type)}')"` : ''}>
                     <div class="transaction-icon ${iconClass}">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             ${t.type === 'buy' ? '<path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 2 2 2-.9 2-2-.9-2-2-2z"/>' : ''}
@@ -6581,7 +7754,7 @@
                     </div>
                     <div class="transaction-info">
                         <div class="transaction-title">${escapeHtml(partyName)} - ${typeLabel}</div>
-                        <div class="transaction-meta">${escapeHtml(t.notes || '')}</div>
+                        <div class="transaction-meta">${escapeHtml(metaText)}</div>
                     </div>
                     <div class="transaction-amount ${amountClass}">
                         ${amountPrefix}${formatNumber(amount)} ${escapeHtml(t.currency || '')}
@@ -6638,9 +7811,13 @@
             const party = state.accounts.find(p => p.id === t.accountId);
             const partyName = party ? party.name : 'نامعلوم';
             const isCredit = t.moneyType === 'credit' || t.moneyType === 'receive';
+            const branchName = (isMainAccount() && state.currentBranchId === 'all' && t.branchId)
+                ? getBranchName(t.branchId)
+                : '';
+            const metaText = [t.notes || (isCredit ? 'جمع' : 'بنام'), branchName].filter(Boolean).join(' · ');
 
             return `
-                <li class="transaction-item" onclick="openMoneyForm('${isCredit ? 'send' : 'receive'}', '${escapeHtml(t.id)}')">
+                <li class="transaction-item" ${canWriteBusinessData() ? `onclick="openMoneyForm('${isCredit ? 'send' : 'receive'}', '${escapeHtml(t.id)}')"` : ''}>
                     <div class="transaction-icon ${isCredit ? 'purchase' : 'sale'}">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             ${isCredit ?
@@ -6650,7 +7827,7 @@
                     </div>
                     <div class="transaction-info">
                         <div class="transaction-title">${escapeHtml(partyName)}</div>
-                        <div class="transaction-meta">${escapeHtml(t.notes || (isCredit ? 'جمع' : 'بنام'))}</div>
+                        <div class="transaction-meta">${escapeHtml(metaText)}</div>
                     </div>
                     <div class="transaction-amount ${isCredit ? 'positive' : 'negative'}">
                         ${isCredit ? '+' : '-'}${formatNumber(Math.abs(t.totalAmount))} ${escapeHtml(currencyNames[t.currency] || t.currency || '')}
@@ -6879,6 +8056,7 @@
                             originalId: id,
                             fullData: { ...transaction },
                             deletedBy: state.currentUser?.uid || 'system',
+                            branchId: transaction.branchId || state.currentBranchId,
                             version: 1,
                             deletedAt: Date.now()
                         };
@@ -6914,11 +8092,21 @@
         let sellCurrency = 'PKR';
 
         function openMoneyForm(type, id = null) {
+            if (!canWriteBusinessData()) { showToast('تاسو د بدلون اجازه نلرئ'); return; }
             document.getElementById('buyForm').classList.remove('active');
             document.getElementById('sellForm').classList.remove('active');
             document.getElementById('transferForm').classList.remove('active');
 
             const form = document.getElementById('moneyForm');
+
+            // The ledger context hides the party picker and shows the account
+            // name in the form header. Reset it for every normal open.
+            form.classList.remove('ledger-context');
+            const accountLabel = document.getElementById('moneyFormAccountName');
+            if (accountLabel) {
+                accountLabel.textContent = '';
+                accountLabel.hidden = true;
+            }
 
             document.getElementById('moneyDate').value = localDateISO();
 
@@ -6932,7 +8120,6 @@
 
             updateMoneyTypeSelector();
             updateMoneyPartySelect();
-            updateMoneyTransferPartySelect();
 
             const t = id ? state.transactions.find(x => x.id === id) : null;
             if (t && t.subType === 'money') {
@@ -6949,25 +8136,22 @@
                 document.getElementById('moneyNotes').value = t.notes || '';
 
                 if (t.toAccountId) {
-                    document.getElementById('moneyHasTransfer').checked = true;
-                    document.getElementById('moneyTransferGroup').style.display = 'block';
-                    document.getElementById('moneyTransferParty').value = t.toAccountId;
-                    document.getElementById('moneyTransferPartySearch').value = (state.accounts.find(a => a.id === t.toAccountId) || {}).name || '';
+                    setMoneySecondAccount(t.toAccountId);
                 } else {
-                    document.getElementById('moneyHasTransfer').checked = false;
-                    document.getElementById('moneyTransferGroup').style.display = 'none';
+                    clearMoneySecondAccount();
                 }
                 document.getElementById('deleteMoneyBtn').style.display = 'block';
             } else {
-                // New transaction: reset currency and transfer so nothing stale
-                // is carried over from a previously edited transaction.
+                // New transaction: reset the party, currency and second
+                // account so nothing stale is carried over.
                 currentMoneyCurrency = state.defaultCurrency;
                 document.getElementById('moneyCurrency').value = currentMoneyCurrency;
                 document.getElementById('moneyTransactionId').value = '';
+                document.getElementById('moneyParty').value = '';
+                document.getElementById('moneyPartySearch').value = '';
                 document.getElementById('moneyAmount').value = '';
                 document.getElementById('moneyNotes').value = '';
-                document.getElementById('moneyHasTransfer').checked = false;
-                document.getElementById('moneyTransferGroup').style.display = 'none';
+                clearMoneySecondAccount();
                 document.getElementById('deleteMoneyBtn').style.display = 'none';
             }
 
@@ -6975,12 +8159,86 @@
         }
 
         function closeMoneyForm() {
-            document.getElementById('moneyForm').classList.remove('active');
+            const form = document.getElementById('moneyForm');
+            form.classList.remove('active');
+            restoreLedgerFormIfNeeded(form);
         }
 
-        function toggleMoneyTransfer() {
-            const checked = document.getElementById('moneyHasTransfer').checked;
-            document.getElementById('moneyTransferGroup').style.display = checked ? 'block' : 'none';
+        function setMoneySecondAccount(accountId) {
+            const account = getAccountById(accountId);
+            if (!account) {
+                clearMoneySecondAccount();
+                return;
+            }
+            const hidden = document.getElementById('moneyTransferParty');
+            const label = document.getElementById('moneySecondAccountLabel');
+            const btn = document.getElementById('moneySecondAccountBtn');
+            const remove = document.getElementById('moneySecondAccountRemove');
+            if (hidden) hidden.value = account.id;
+            if (label) label.textContent = account.name || '';
+            if (btn) btn.classList.add('has-account');
+            if (remove) remove.hidden = false;
+        }
+
+        function clearMoneySecondAccount() {
+            const hidden = document.getElementById('moneyTransferParty');
+            const label = document.getElementById('moneySecondAccountLabel');
+            const btn = document.getElementById('moneySecondAccountBtn');
+            const remove = document.getElementById('moneySecondAccountRemove');
+            if (hidden) hidden.value = '';
+            if (label) label.textContent = 'دويم اکاونټ';
+            if (btn) btn.classList.remove('has-account');
+            if (remove) remove.hidden = true;
+        }
+
+        function openMoneySecondAccountModal() {
+            const search = document.getElementById('moneySecondAccountSearch');
+            if (search) search.value = '';
+            renderMoneySecondAccountOptions();
+            document.getElementById('moneySecondAccountModal').classList.add('active');
+        }
+
+        function closeMoneySecondAccountModal() {
+            document.getElementById('moneySecondAccountModal').classList.remove('active');
+        }
+
+        function renderMoneySecondAccountOptions() {
+            const container = document.getElementById('moneySecondAccountList');
+            if (!container) return;
+
+            const searchInput = document.getElementById('moneySecondAccountSearch');
+            const search = (searchInput ? searchInput.value : '').trim().toLowerCase();
+            const mainId = document.getElementById('moneyParty').value;
+            const selectedId = document.getElementById('moneyTransferParty').value;
+
+            // The main account is already on the transaction, so it cannot be
+            // picked again as the second account.
+            let accounts = state.accounts.filter(a => !a.isDeleted && a.id !== mainId);
+            if (search) {
+                accounts = accounts.filter(a => (a.name || '').toLowerCase().includes(search));
+            }
+            accounts.sort((a, b) => String(a.name || '').localeCompare(String(b.name || '')));
+
+            if (!accounts.length) {
+                container.innerHTML = '<div class="second-account-empty">هیڅ حساب ونه مومل شو</div>';
+                return;
+            }
+
+            container.innerHTML = accounts.map(a => `
+                <button type="button" class="second-account-option ${a.id === selectedId ? 'selected' : ''}" onclick="selectMoneySecondAccount('${escapeHtml(a.id)}')">
+                    <div class="account-avatar ${escapeHtml(a.type)}">${escapeHtml((a.name || '?').charAt(0))}</div>
+                    <div class="second-account-option-info">
+                        <div class="second-account-option-name">${escapeHtml(a.name)}</div>
+                        <div class="second-account-option-type">${a.type === 'supplier' ? 'سپلایر' : a.type === 'mill' ? 'میل' : 'ګراک'}</div>
+                    </div>
+                    ${a.id === selectedId ? '<svg class="second-account-option-check" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>' : ''}
+                </button>
+            `).join('');
+        }
+
+        function selectMoneySecondAccount(accountId) {
+            setMoneySecondAccount(accountId);
+            closeMoneySecondAccountModal();
         }
 
         function selectMoneyType(type) {
@@ -6996,10 +8254,6 @@
 
         function updateMoneyPartySelect() {
             populateAutocomplete('moneyPartyList', state.accounts.filter(p => !p.isDeleted));
-        }
-
-        function updateMoneyTransferPartySelect() {
-            populateAutocomplete('moneyTransferPartyList', state.accounts.filter(p => !p.isDeleted));
         }
 
         function generateMoneyFullNote(type, mainParty, transferParty, note) {
@@ -7023,14 +8277,13 @@
         }
 
         function saveMoneyTransaction() {
+            if (!guardBusinessWrite()) return;
             const id = document.getElementById('moneyTransactionId').value;
             const date = document.getElementById('moneyDate').value;
             const accountId = document.getElementById('moneyParty').value;
             const amount = parseFloat(document.getElementById('moneyAmount').value) || 0;
             const notes = document.getElementById('moneyNotes').value;
-            const toAccountId = document.getElementById('moneyHasTransfer').checked
-                ? document.getElementById('moneyTransferParty').value
-                : null;
+            const toAccountId = document.getElementById('moneyTransferParty').value || null;
 
             if (!accountId) {
                 showToast('خپلمني وټاکئ');
@@ -7102,6 +8355,7 @@
                     unitId: null,
                     parentId: null,
                     fullNote: '',
+                    branchId: state.currentBranchId,
                     version: 1,
                     createdBy: state.currentUser?.uid || 'system',
                     createdAt: Date.now(),
@@ -7138,6 +8392,7 @@
         }
 
         function deleteMoneyTransaction() {
+            if (!guardBusinessWrite()) return;
             const id = document.getElementById('moneyTransactionId').value;
             if (!id) return;
 
@@ -7161,6 +8416,7 @@
                         originalId: id,
                         fullData: { ...transaction },
                         deletedBy: state.currentUser?.uid || 'system',
+                        branchId: transaction.branchId || state.currentBranchId,
                         version: 1,
                         deletedAt: Date.now()
                     };
@@ -7184,10 +8440,350 @@
             });
         }
 
+        // ==================== BRANCHES ====================
+        let currentBranchRole = 'admin';
+
+        function renderBranchChips() {
+            const selector = document.getElementById('branchSelector');
+            const chips = document.getElementById('branchChips');
+            if (!selector || !chips) return;
+
+            if (!state.currentRole) {
+                selector.hidden = true;
+                chips.innerHTML = '';
+                return;
+            }
+            selector.hidden = false;
+
+            if (state.currentRole !== 'main') {
+                const branch = getBranchById(state.currentBranchId);
+                const roleLabel = state.currentRole === 'viewer' ? 'لیدونکی' : 'کارن';
+                chips.innerHTML = `<span class="branch-chip active branch-chip-static">${escapeHtml(branch ? branch.name : 'برخه')} · ${roleLabel}</span>`;
+                return;
+            }
+
+            let html = `<button class="branch-chip ${state.currentBranchId === 'all' ? 'active' : ''}" onclick="switchMainBranch('all')">ټولې</button>`;
+            (state.branches || [])
+                .filter(b => b.active !== false)
+                .forEach(branch => {
+                    html += `<button class="branch-chip ${state.currentBranchId === branch.id ? 'active' : ''}" onclick="switchMainBranch('${escapeHtml(branch.id)}')">${escapeHtml(branch.name)}</button>`;
+                });
+            chips.innerHTML = html;
+        }
+
+        function switchMainBranch(branchId) {
+            if (!isMainAccount()) return;
+            if (branchId === state.currentBranchId) return;
+            loadBranchView(branchId);
+        }
+
+        function renderBranchesSettings() {
+            const section = document.getElementById('branchesSettingsSection');
+            const list = document.getElementById('branchesList');
+            if (!section || !list) return;
+
+            section.style.display = canManageBranches() ? 'block' : 'none';
+            if (!canManageBranches()) return;
+
+            if (!state.branches.length) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-text">هیڅ برخه نشته</div>
+                        <div class="empty-state-hint">لومړۍ برخه جوړه کړئ</div>
+                    </div>
+                `;
+                return;
+            }
+
+            list.innerHTML = state.branches.map(branch => {
+                const roleLabel = branch.role === 'viewer' ? 'یوازې لیدونکی' : 'برخه کارن';
+                const inactive = branch.active === false ? ' · غیر فعاله' : '';
+                return `
+                    <div class="settings-item" onclick="openBranchModal('${escapeHtml(branch.id)}')">
+                        <div class="settings-icon currency">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+                            </svg>
+                        </div>
+                        <div class="settings-text">
+                            <div class="settings-label">${escapeHtml(branch.name)}</div>
+                            <div class="settings-desc">${escapeHtml(branch.email || '')} · ${roleLabel}${inactive}</div>
+                        </div>
+                        <div class="settings-arrow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                            </svg>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openBranchModal(id = null) {
+            if (!canManageBranches()) return;
+            const modal = document.getElementById('branchModal');
+            const title = document.getElementById('branchModalTitle');
+            const deactivateBtn = document.getElementById('deactivateBranchBtn');
+            const emailInput = document.getElementById('branchEmail');
+            const passwordInput = document.getElementById('branchPassword');
+            const passwordHint = document.getElementById('branchPasswordHint');
+            const activeGroup = document.getElementById('branchActiveGroup');
+            const activeInput = document.getElementById('branchActive');
+
+            document.getElementById('branchPassword').value = '';
+            if (id) {
+                const branch = getBranchById(id);
+                if (!branch) return;
+                title.textContent = 'برخه تعديل';
+                document.getElementById('branchId').value = id;
+                document.getElementById('branchName').value = branch.name || '';
+                emailInput.value = branch.email || '';
+                emailInput.disabled = true;
+                currentBranchRole = branch.role === 'viewer' ? 'viewer' : 'admin';
+                deactivateBtn.style.display = branch.active === false ? 'none' : 'block';
+                passwordHint.style.display = 'block';
+                activeGroup.style.display = 'block';
+                activeInput.checked = branch.active !== false;
+            } else {
+                title.textContent = 'نوې برخه';
+                document.getElementById('branchId').value = '';
+                document.getElementById('branchName').value = '';
+                emailInput.value = '';
+                emailInput.disabled = false;
+                currentBranchRole = 'admin';
+                deactivateBtn.style.display = 'none';
+                passwordHint.style.display = 'none';
+                activeGroup.style.display = 'none';
+                activeInput.checked = true;
+            }
+
+            updateBranchRoleSelector();
+            modal.classList.add('active');
+        }
+
+        function closeBranchModal() {
+            document.getElementById('branchModal').classList.remove('active');
+            document.getElementById('branchEmail').disabled = false;
+        }
+
+        function selectBranchRole(role) {
+            currentBranchRole = role === 'viewer' ? 'viewer' : 'admin';
+            updateBranchRoleSelector();
+        }
+
+        function updateBranchRoleSelector() {
+            document.querySelectorAll('#branchRoleSelector .type-option').forEach(opt => {
+                opt.classList.toggle('selected', opt.dataset.role === currentBranchRole);
+            });
+        }
+
+        function getSecondaryAuth() {
+            let app;
+            try {
+                app = firebase.app('branchCreator');
+            } catch (error) {
+                app = firebase.initializeApp(firebaseConfig, 'branchCreator');
+            }
+            return app.auth();
+        }
+
+        async function createBranchAuthUser(email, password) {
+            const secondaryAuth = getSecondaryAuth();
+            const credential = await secondaryAuth.createUserWithEmailAndPassword(email, password);
+            await secondaryAuth.signOut();
+            return credential.user;
+        }
+
+        async function seedBranchData(branchId) {
+            const now = Date.now();
+            const productId = 'product_' + generateId();
+            const unitId = 'unit_' + generateId();
+            const product = {
+                id: productId, name: 'وريجي', branchId, version: 1,
+                createdAt: now, lastModifiedAt: now, updatedAt: now,
+                createdBy: state.currentUser?.uid || 'system'
+            };
+            const unit = {
+                id: unitId, name: 'کيلو', branchId, version: 1,
+                createdAt: now, lastModifiedAt: now, updatedAt: now,
+                createdBy: state.currentUser?.uid || 'system'
+            };
+            const settings = {
+                id: 'main', branchId, defaultCurrency: 'PKR',
+                defaultUnit: unitId, defaultProduct: productId, updatedAt: now
+            };
+
+            const batch = db.batch();
+            batch.set(getBranchCollectionRef(branchId, 'products').doc(productId), product, { merge: true });
+            batch.set(getBranchCollectionRef(branchId, 'units').doc(unitId), unit, { merge: true });
+            batch.set(getBranchCollectionRef(branchId, 'settings').doc('main'), settings, { merge: true });
+            await withTimeout(batch.commit(), 20000);
+        }
+
+        async function writeBranchDoc(branch) {
+            try {
+                await withTimeout(getBranchDocRef(branch.id).set(branch, { merge: true }), 20000);
+            } catch (error) {
+                enqueueSync('branches', branch.id);
+                throw error;
+            }
+        }
+
+        async function saveBranch() {
+            if (!canManageBranches()) return;
+
+            const id = document.getElementById('branchId').value;
+            const name = document.getElementById('branchName').value.trim();
+            const email = document.getElementById('branchEmail').value.trim().toLowerCase();
+            const password = document.getElementById('branchPassword').value;
+            const role = currentBranchRole === 'viewer' ? 'viewer' : 'admin';
+
+            if (!name) { showToast('د برخې نوم د پر کول ضروري دی'); return; }
+            if (!email) { showToast('ایمیل د پر کول ضروري دی'); return; }
+            if (!id && state.branches.some(b => String(b.email || '').toLowerCase() === email)) {
+                showToast('دا ایمیل لا یوې برخې ته ټاکل شوی دی');
+                return;
+            }
+            if (!isOnline) { showToast('برخه جوړول یا بدلول انټرنټ ته اړتیا لري'); return; }
+
+            if (!id) {
+                if (!password || password.length < 6) {
+                    showToast('پاسورډ باید لږ تر لږه ۶ توري وي');
+                    return;
+                }
+                try {
+                    let uid = null;
+                    let createdAuth = false;
+                    try {
+                        const user = await createBranchAuthUser(email, password);
+                        uid = user.uid;
+                        createdAuth = true;
+                    } catch (error) {
+                        if (error.code !== 'auth/email-already-in-use') throw error;
+                        // Existing Firebase Auth user: if the entered password is
+                        // correct, capture the UID so we can write the branch
+                        // mapping that makes login and rules reliable.
+                        try {
+                            const secondaryAuth = getSecondaryAuth();
+                            const credential = await secondaryAuth.signInWithEmailAndPassword(email, password);
+                            uid = credential.user.uid;
+                            await secondaryAuth.signOut();
+                        } catch (signInError) {
+                            console.warn('Existing branch email could not be verified:', signInError);
+                        }
+                    }
+
+                    const branch = {
+                        id: 'branch_' + generateId(),
+                        name: name,
+                        email: email,
+                        uid: uid,
+                        role: role,
+                        active: true,
+                        version: 1,
+                        createdAt: Date.now(),
+                        updatedAt: Date.now(),
+                        createdBy: state.currentUser?.uid || 'system'
+                    };
+                    state.branches.push(branch);
+                    await writeBranchDoc(branch);
+                    if (uid) {
+                        try {
+                            await withTimeout(
+                                db.doc(APP_DOC).collection('branchUsers').doc(uid).set({
+                                    uid: uid,
+                                    email: email,
+                                    branchId: branch.id,
+                                    updatedAt: Date.now()
+                                }, { merge: true }),
+                                20000
+                            );
+                        } catch (error) {
+                            console.warn('Could not write branch user mapping:', error);
+                        }
+                    }
+                    await seedBranchData(branch.id);
+                    removeFromQueue('branches', branch.id);
+                    saveState(true);
+                    closeBranchModal();
+                    renderBranchesSettings();
+                    renderBranchChips();
+                    showToast(createdAuth ? 'برخه جوړه شوه' : 'برخه جوړه شوه - دا ایمیل لا دمخه فایربیس اکاونټ لري');
+                } catch (error) {
+                    console.error('Branch creation failed:', error);
+                    showToast('برخه جوړه نشوه - ' + (error.message || 'بیا هڅه وکړئ'));
+                }
+                return;
+            }
+
+            const branch = getBranchById(id);
+            if (!branch) return;
+            branch.name = name;
+            branch.role = role;
+            branch.active = document.getElementById('branchActive').checked;
+            branch.updatedAt = Date.now();
+            branch.version = (branch.version || 0) + 1;
+
+            try {
+                await writeBranchDoc(branch);
+                removeFromQueue('branches', id);
+                saveState(true);
+                if (password) {
+                    try {
+                        await auth.sendPasswordResetEmail(branch.email);
+                        showToast('د پاسورډ بیا تنظیم لینک واستول شو');
+                    } catch (error) {
+                        showToast('د پاسورډ لینک ونشو استول شو');
+                    }
+                }
+                closeBranchModal();
+                renderBranchesSettings();
+                renderBranchChips();
+                showToast('برخه تصحیح شوه');
+            } catch (error) {
+                console.error('Branch update failed:', error);
+                showToast('برخه تصحیح نشوه - ' + (error.message || 'بیا هڅه وکړئ'));
+            }
+        }
+
+        function deactivateBranch() {
+            if (!canManageBranches()) return;
+            const id = document.getElementById('branchId').value;
+            if (!id) return;
+            const branch = getBranchById(id);
+            if (!branch) return;
+
+            openConfirmModal(
+                'برخه غیر فعالول',
+                'دا برخه به نوره ونشي کولای ننوځي. آیا ډاډه یاست؟',
+                async () => {
+                    closeConfirmModal();
+                    branch.active = false;
+                    branch.updatedAt = Date.now();
+                    branch.version = (branch.version || 0) + 1;
+                    try {
+                        await writeBranchDoc(branch);
+                        removeFromQueue('branches', id);
+                        saveState(true);
+                        closeBranchModal();
+                        renderBranchesSettings();
+                        renderBranchChips();
+                        showToast('برخه غیر فعاله شوه');
+                    } catch (error) {
+                        showToast('برخه غیر فعاله نشوه - ' + (error.message || 'بیا هڅه وکړئ'));
+                    }
+                }
+            );
+        }
+
         // Party Modal
         let currentPartyType = 'supplier';
 
         function openPartyModal(id = null) {
+            if (!canWriteBusinessData()) {
+                showToast('تاسو د بدلون اجازه نلرئ');
+                return;
+            }
             const modal = document.getElementById('partyModal');
             const title = document.getElementById('partyModalTitle');
             const deleteBtn = document.getElementById('deletePartyBtn');
@@ -7202,6 +8798,7 @@
                     currentPartyType = account.type;
                     document.getElementById('partyName').value = account.name;
                     document.getElementById('partyPhone').value = account.phone || '';
+                    document.getElementById('partyLocation').value = account.location || '';
                 }
             } else {
                 title.textContent = 'نوی حساب';
@@ -7209,10 +8806,68 @@
                 document.getElementById('partyId').value = '';
                 document.getElementById('partyName').value = '';
                 document.getElementById('partyPhone').value = '';
+                document.getElementById('partyLocation').value = '';
             }
+
+            const locationList = document.getElementById('partyLocationList');
+            if (locationList) locationList.classList.remove('show');
 
             updatePartyTypeSelector();
             modal.classList.add('active');
+        }
+
+        function getKnownAccountLocations() {
+            const locations = new Set();
+            state.accounts
+                .filter(a => !a.isDeleted && a.location)
+                .forEach(a => locations.add(String(a.location).trim()));
+            return Array.from(locations).filter(Boolean).sort((a, b) => a.localeCompare(b));
+        }
+
+        function renderPartyLocationSuggestions() {
+            const input = document.getElementById('partyLocation');
+            const list = document.getElementById('partyLocationList');
+            if (!input || !list) return;
+
+            const query = input.value.trim().toLowerCase();
+            const locations = getKnownAccountLocations().filter(loc =>
+                !query || loc.toLowerCase().includes(query)
+            );
+
+            if (!locations.length) {
+                list.innerHTML = '';
+                list.classList.remove('show');
+                return;
+            }
+
+            list.innerHTML = locations.map(loc =>
+                `<div class="autocomplete-item" data-value="${escapeHtml(loc)}">${escapeHtml(loc)}</div>`
+            ).join('');
+            list.classList.add('show');
+
+            list.querySelectorAll('.autocomplete-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    input.value = item.dataset.value;
+                    list.classList.remove('show');
+                });
+            });
+        }
+
+        function setupPartyLocationAutocomplete() {
+            const input = document.getElementById('partyLocation');
+            const list = document.getElementById('partyLocationList');
+            if (!input || !list) return;
+            const wrapper = input.closest('.autocomplete');
+
+            input.addEventListener('input', renderPartyLocationSuggestions);
+            input.addEventListener('focus', renderPartyLocationSuggestions);
+            input.addEventListener('click', renderPartyLocationSuggestions);
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') list.classList.remove('show');
+            });
+            document.addEventListener('click', (e) => {
+                if (!wrapper.contains(e.target)) list.classList.remove('show');
+            });
         }
 
         function closePartyModal() {
@@ -7234,6 +8889,7 @@
             const id = document.getElementById('partyId').value;
             const name = document.getElementById('partyName').value.trim();
             const phone = document.getElementById('partyPhone').value.trim();
+            const location = document.getElementById('partyLocation').value.trim();
 
             if (!name) {
                 showToast('نوم د پر کول ضروري دی');
@@ -7241,9 +8897,9 @@
             }
 
             if (id) {
-                updateAccount(id, name, currentPartyType, phone);
+                updateAccount(id, name, currentPartyType, phone, location);
             } else {
-                addAccount(name, currentPartyType, phone);
+                addAccount(name, currentPartyType, phone, location);
             }
 
             closePartyModal();
@@ -7297,6 +8953,7 @@
         }
 
         function showDefaultCurrencyModal() {
+            if (!guardSettingsWrite()) return;
             const container = document.getElementById('defaultCurrencyOptions');
             if (!container) return;
             container.innerHTML = Object.keys(currencyNames).map(c => `
@@ -7313,6 +8970,7 @@
         }
 
         function setDefaultCurrency(currency) {
+            if (!guardSettingsWrite()) return;
             if (!currencyNames[currency]) return;
             state.defaultCurrency = currency;
             saveState();
@@ -7335,6 +8993,7 @@
         }
 
         function showProductsModal() {
+            if (!guardSettingsWrite()) return;
             renderProductsList();
             document.getElementById('productsModal').classList.add('active');
         }
@@ -7421,6 +9080,7 @@
         }
 
         function showUnitsModal() {
+            if (!guardSettingsWrite()) return;
             renderUnitsList();
             document.getElementById('unitsModal').classList.add('active');
         }
@@ -7561,6 +9221,7 @@
         }
 
         function importDataPrompt() {
+            if (!canWriteBusinessData()) { showToast('تاسو د بدلون اجازه نلرئ'); return; }
             if (!confirm('دا فایل به ټول اوسني معلومات بدل کړي (په دې وسیله او بیا په فایربیس کې). دوام ورکړئ؟')) {
                 return;
             }
@@ -7582,6 +9243,8 @@
                         // Replace everything locally. The live auth session is
                         // kept; login state is never taken from the file.
                         const signedInUser = auth.currentUser;
+                        const importBranchId = state.currentBranchId;
+                        const withBranch = list => (list || []).map(rec => ({ ...rec, branchId: importBranchId }));
                         state = {
                             users: [],
                             currentUser: signedInUser ? {
@@ -7589,14 +9252,18 @@
                                 email: signedInUser.email,
                                 displayName: signedInUser.displayName || signedInUser.email.split('@')[0]
                             } : null,
-                            products: imported.products || [],
-                            units: imported.units || [],
-                            accounts: imported.accounts || [],
-                            stockBalances: imported.stockBalances || [],
-                            moneyBalances: imported.moneyBalances || [],
-                            transactions: imported.transactions || [],
-                            deletedTransactions: imported.deletedTransactions || [],
-                            editHistory: imported.editHistory || [],
+                            branches: state.branches,
+                            currentBranchId: state.currentBranchId,
+                            currentRole: state.currentRole,
+                            branchSettings: state.branchSettings || {},
+                            products: withBranch(imported.products),
+                            units: withBranch(imported.units),
+                            accounts: withBranch(imported.accounts),
+                            stockBalances: withBranch(imported.stockBalances),
+                            moneyBalances: withBranch(imported.moneyBalances),
+                            transactions: withBranch(imported.transactions),
+                            deletedTransactions: withBranch(imported.deletedTransactions),
+                            editHistory: withBranch(imported.editHistory),
                             defaultCurrency: imported.defaultCurrency || 'PKR',
                             defaultUnit: imported.defaultUnit || 'kg',
                             defaultProduct: imported.defaultProduct || 'rice',
@@ -7604,12 +9271,12 @@
                             lastFetch: null,
                             syncQueue: [],
                             loginStatus: !!signedInUser,
-                            migrated: true
+                            migrated: true,
+                            branchSchema: 2
                         };
                         ensureStateDefaults();
                         saveState(true);
                         enqueueAll();
-                        enqueueSync('settings', 'main');
                         renderAll();
                         renderFirebaseAccountUI();
                         showToast('ډیټا لوډ شوه');
@@ -7639,16 +9306,29 @@
                 if (modals.length) {
                     const top = modals[modals.length - 1];
                     if (top.id === 'loginModal' && isForceLogin) return;
-                    if (top.id === 'ledgerModal') { closeLedgerModal(); return; }
                     if (top.id === 'confirmModal') { closeConfirmModal(); return; }
                     if (top.id === 'nativeUpdateModal') { closeNativeUpdateModal(); return; }
                     top.classList.remove('active');
                     return;
                 }
 
+                // A transaction form opened from the ledger: warning + return
+                // to the ledger instead of closing the whole accounts view.
+                if (ledgerFormContext) {
+                    requestCloseLedgerForm();
+                    return;
+                }
+
                 const forms = Array.from(document.querySelectorAll('.inline-form.active'));
                 if (forms.length) {
                     forms[forms.length - 1].classList.remove('active');
+                    return;
+                }
+
+                // Inside the Accounts tab, the ledger is a sub-tab: go back
+                // to the account list before leaving the tab.
+                if (isLedgerViewOpen()) {
+                    closeLedgerView();
                     return;
                 }
 
@@ -7664,6 +9344,7 @@
 
         // Initialize
         setupAllAutocompletes();
+        setupPartyLocationAutocomplete();
         setupNativeBackButton();
         loadState();
         setupNativeUpdates();
