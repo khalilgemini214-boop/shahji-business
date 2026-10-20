@@ -635,6 +635,29 @@
             transform: scale(0.95);
         }
 
+        .btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
+
+        .btn-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: btnSpin 0.65s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes btnSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn.is-loading {
+            pointer-events: none;
+        }
+
         .btn-primary {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
@@ -843,6 +866,11 @@
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
+        }
+
+        /* Confirmations always sit above form/edit modals. */
+        #confirmModal {
+            z-index: 1200;
         }
 
         /* Centered modal variant */
@@ -2051,7 +2079,7 @@
         <main class="main-content">
             <!-- Branch selector (main: all branches; branch users: own branch) -->
             <div class="branch-selector" id="branchSelector" hidden>
-                <span class="branch-selector-label">برخه</span>
+                <span class="branch-selector-label">څانګه</span>
                 <div class="branch-chips" id="branchChips"></div>
             </div>
 
@@ -2709,9 +2737,9 @@
 
                 <!-- Branch Management (main only) -->
                 <div class="settings-section" id="branchesSettingsSection" style="display:none;">
-                    <div class="settings-title">برخې (Branches)</div>
+                    <div class="settings-title">څانګي (Branches)</div>
                     <div id="branchesList"></div>
-                    <button class="btn btn-primary" style="width:100%; margin-top:10px;" onclick="openBranchModal()">نوې برخه زیاته کړه</button>
+                    <button class="btn btn-primary" style="width:100%; margin-top:10px;" onclick="openBranchModal()">نوې څانګه زیاته کړه</button>
                 </div>
 
                 <!-- Data Management -->
@@ -2953,7 +2981,7 @@
                     <p id="confirmDesc" style="margin-bottom:20px;"></p>
                     <div style="display:flex;gap:10px;justify-content:flex-end;">
                         <button class="btn" onclick="closeConfirmModal()">لغوه کول</button>
-                        <button class="btn btn-primary" onclick="confirmDelete()">هو</button>
+                        <button class="btn btn-primary" id="confirmYesBtn" onclick="confirmDelete()">هو</button>
                     </div>
                 </div>
             </div>
@@ -2979,7 +3007,7 @@
         <div class="modal-overlay modal-center" id="branchModal">
             <div class="modal" style="max-width:420px;">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="branchModalTitle">نوې برخه</h2>
+                    <h2 class="modal-title" id="branchModalTitle">نوې څانګه</h2>
                     <button class="modal-close" onclick="closeBranchModal()">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
                     </button>
@@ -2987,7 +3015,7 @@
                 <div class="modal-body">
                     <input type="hidden" id="branchId">
                     <div class="form-group">
-                        <label class="form-label">د برخې نوم</label>
+                        <label class="form-label">د څانګې نوم</label>
                         <input type="text" class="form-input" id="branchName" placeholder="لکه کابل څانګه">
                     </div>
                     <div class="form-group">
@@ -2997,24 +3025,25 @@
                     <div class="form-group">
                         <label class="form-label" id="branchPasswordLabel">پاسورډ</label>
                         <input type="password" class="form-input" id="branchPassword" placeholder="********" autocomplete="new-password">
-                        <div class="form-hint" id="branchPasswordHint" style="display:none;">د پاسورډ بدلولو لپاره به د برخې ایمیل ته د بیا تنظیم لینک واستول شي.</div>
+                        <div class="form-hint" id="branchPasswordHint" style="display:none;">د پاسورډ بدلولو لپاره به د څانګې ایمیل ته د بیا تنظیم لینک واستول شي.</div>
                     </div>
                     <div class="form-group">
                         <label class="form-label">ډول</label>
                         <div class="type-selector" id="branchRoleSelector">
-                            <button type="button" class="type-option" data-role="admin" onclick="selectBranchRole('admin')">برخه کارن</button>
+                            <button type="button" class="type-option" data-role="admin" onclick="selectBranchRole('admin')">څانګه کارن</button>
                             <button type="button" class="type-option" data-role="viewer" onclick="selectBranchRole('viewer')">یوازې لیدونکی</button>
                         </div>
                     </div>
                     <div class="form-group" id="branchActiveGroup" style="display:none;">
                         <label class="form-label" style="display:flex; align-items:center; gap:8px;">
                             <input type="checkbox" id="branchActive">
-                            فعاله برخه
+                            فعاله څانګه
                         </label>
                     </div>
-                    <div style="display:flex;gap:10px;margin-top:15px;">
-                        <button class="btn btn-primary" style="flex:1;" onclick="saveBranch()">خوندی کول</button>
+                    <div style="display:flex;gap:10px;margin-top:15px;flex-wrap:wrap;">
+                        <button class="btn btn-primary" id="saveBranchBtn" style="flex:1;min-width:130px;" onclick="saveBranch()">خوندی کول</button>
                         <button class="btn btn-danger" id="deactivateBranchBtn" onclick="deactivateBranch()" style="display:none;">غیر فعالول</button>
+                        <button class="btn btn-danger" id="deleteBranchBtn" onclick="deleteBranch()" style="display:none;">ډيليټ کول</button>
                     </div>
                 </div>
             </div>
@@ -3188,7 +3217,7 @@
                     <input type="password" class="form-input" id="loginPassword" placeholder="********">
                 </div>
                 <div id="loginError" style="color: red; display: none; margin-bottom: 10px;"></div>
-                <button class="btn btn-primary" style="width: 100%;" onclick="handleLogin()">
+                <button class="btn btn-primary" id="loginBtn" style="width: 100%;" onclick="handleLogin()">
                     ننوتل
                 </button>
                 <p style="text-align: center; margin-top: 15px; font-size: 0.8rem; color: #666;">
@@ -3833,7 +3862,7 @@
 
         function guardSettingsWrite() {
             if (canManageSettings() && state.currentBranchId && state.currentBranchId !== 'all') return true;
-            showToast(state.currentBranchId === 'all' ? 'لومړی یوه برخه وټاکئ' : 'تاسو د بدلون اجازه نلرئ');
+            showToast(state.currentBranchId === 'all' ? 'لومړی یوه څانګه وټاکئ' : 'تاسو د بدلون اجازه نلرئ');
             return false;
         }
 
@@ -4403,14 +4432,14 @@
                         applyBranchSnapshot(data, 'all', false);
                     } else {
                         const branchId = state.currentBranchId || ((state.branches[0] || {}).id);
-                        if (!branchId) throw new Error('هیڅ برخه نشته');
+                        if (!branchId) throw new Error('هیڅ څانګه نشته');
                         const data = await fetchBranchSnapshot(branchId);
                         applyBranchSnapshot(data, branchId, true);
                         state.currentBranchId = branchId;
                     }
                 } else {
                     const branchId = state.currentBranchId;
-                    if (!branchId) throw new Error('برخه ونه مومل شوه');
+                    if (!branchId) throw new Error('څانګه ونه مومل شوه');
                     const data = await fetchBranchSnapshot(branchId);
                     applyBranchSnapshot(data, branchId, state.currentRole !== 'viewer');
                 }
@@ -4440,7 +4469,7 @@
 
         async function loadBranchView(branchId) {
             if (state.currentRole !== 'main' || isSyncing || isFetching) return;
-            if (!isOnline) { showToast('آفلاین - د برخې بدلولو لپاره انټرنټ ته وصل شئ'); return; }
+            if (!isOnline) { showToast('آفلاین - د څانګې بدلولو لپاره انټرنټ ته وصل شئ'); return; }
 
             isFetching = true;
             updateSyncIndicator();
@@ -4460,7 +4489,7 @@
                 renderBranchChips();
             } catch (error) {
                 console.error('Branch view load failed:', error);
-                showToast('برخه نه شوه لوستل شوې - ' + (error && error.message ? error.message : 'بیا هڅه وکړئ'));
+                showToast('څانګه نه شوه لوستل شوې - ' + (error && error.message ? error.message : 'بیا هڅه وکړئ'));
             } finally {
                 isFetching = false;
                 updateSyncIndicator();
@@ -4795,7 +4824,7 @@
             const branch = await resolveUserBranch(user);
             if (branch && branch.active === false) {
                 try { await auth.signOut(); } catch (e) {}
-                throw new Error('دا برخه غیر فعاله ده');
+                throw new Error('دا څانګه غیر فعاله ده');
             }
 
             if (branch) {
@@ -4851,6 +4880,10 @@
                 return;
             }
 
+            const loginBtn = document.getElementById('loginBtn');
+            setButtonLoading(loginBtn, 'ننوځي...');
+            errorDiv.style.display = 'none';
+
             try {
                 const userCredential = await auth.signInWithEmailAndPassword(email, password);
                 const user = userCredential.user;
@@ -4867,6 +4900,8 @@
             } catch (error) {
                 errorDiv.textContent = ' ننوتل ناکامه شوه: ' + error.message;
                 errorDiv.style.display = 'block';
+            } finally {
+                clearButtonLoading(loginBtn);
             }
         }
 
@@ -4897,10 +4932,10 @@
             if (state.currentUser) {
                 const roleLabel = state.currentRole === 'main'
                     ? 'مین حساب'
-                    : (state.currentRole === 'viewer' ? 'یوازې لیدونکی' : 'برخه کارن');
+                    : (state.currentRole === 'viewer' ? 'یوازې لیدونکی' : 'څانګه کارن');
                 const branchLabel = state.currentRole === 'main'
-                    ? 'ټولې برخې'
-                    : (getBranchName(state.currentBranchId) || 'برخه');
+                    ? 'ټولې څانګي'
+                    : (getBranchName(state.currentBranchId) || 'څانګه');
                 container.innerHTML = `
                     <div class="settings-item">
                         <div class="settings-icon firebase">
@@ -8443,6 +8478,24 @@
         // ==================== BRANCHES ====================
         let currentBranchRole = 'admin';
 
+        function setButtonLoading(button, text) {
+            if (!button) return;
+            if (!button.dataset.originalHtml) button.dataset.originalHtml = button.innerHTML;
+            button.disabled = true;
+            button.classList.add('is-loading');
+            button.innerHTML = `<span class="btn-spinner"></span><span>${escapeHtml(text || '')}</span>`;
+        }
+
+        function clearButtonLoading(button) {
+            if (!button) return;
+            button.disabled = false;
+            button.classList.remove('is-loading');
+            if (button.dataset.originalHtml) {
+                button.innerHTML = button.dataset.originalHtml;
+                delete button.dataset.originalHtml;
+            }
+        }
+
         function renderBranchChips() {
             const selector = document.getElementById('branchSelector');
             const chips = document.getElementById('branchChips');
@@ -8458,7 +8511,7 @@
             if (state.currentRole !== 'main') {
                 const branch = getBranchById(state.currentBranchId);
                 const roleLabel = state.currentRole === 'viewer' ? 'لیدونکی' : 'کارن';
-                chips.innerHTML = `<span class="branch-chip active branch-chip-static">${escapeHtml(branch ? branch.name : 'برخه')} · ${roleLabel}</span>`;
+                chips.innerHTML = `<span class="branch-chip active branch-chip-static">${escapeHtml(branch ? branch.name : 'څانګه')} · ${roleLabel}</span>`;
                 return;
             }
 
@@ -8488,15 +8541,15 @@
             if (!state.branches.length) {
                 list.innerHTML = `
                     <div class="empty-state">
-                        <div class="empty-state-text">هیڅ برخه نشته</div>
-                        <div class="empty-state-hint">لومړۍ برخه جوړه کړئ</div>
+                        <div class="empty-state-text">هیڅ څانګه نشته</div>
+                        <div class="empty-state-hint">لومړۍ څانګه جوړه کړئ</div>
                     </div>
                 `;
                 return;
             }
 
             list.innerHTML = state.branches.map(branch => {
-                const roleLabel = branch.role === 'viewer' ? 'یوازې لیدونکی' : 'برخه کارن';
+                const roleLabel = branch.role === 'viewer' ? 'یوازې لیدونکی' : 'څانګه کارن';
                 const inactive = branch.active === false ? ' · غیر فعاله' : '';
                 return `
                     <div class="settings-item" onclick="openBranchModal('${escapeHtml(branch.id)}')">
@@ -8524,34 +8577,41 @@
             const modal = document.getElementById('branchModal');
             const title = document.getElementById('branchModalTitle');
             const deactivateBtn = document.getElementById('deactivateBranchBtn');
+            const deleteBtn = document.getElementById('deleteBranchBtn');
+            const saveBtn = document.getElementById('saveBranchBtn');
             const emailInput = document.getElementById('branchEmail');
             const passwordInput = document.getElementById('branchPassword');
             const passwordHint = document.getElementById('branchPasswordHint');
             const activeGroup = document.getElementById('branchActiveGroup');
             const activeInput = document.getElementById('branchActive');
 
+            clearButtonLoading(saveBtn);
+            clearButtonLoading(deactivateBtn);
+            clearButtonLoading(deleteBtn);
             document.getElementById('branchPassword').value = '';
             if (id) {
                 const branch = getBranchById(id);
                 if (!branch) return;
-                title.textContent = 'برخه تعديل';
+                title.textContent = 'څانګه تعديل';
                 document.getElementById('branchId').value = id;
                 document.getElementById('branchName').value = branch.name || '';
                 emailInput.value = branch.email || '';
                 emailInput.disabled = true;
                 currentBranchRole = branch.role === 'viewer' ? 'viewer' : 'admin';
                 deactivateBtn.style.display = branch.active === false ? 'none' : 'block';
+                deleteBtn.style.display = 'block';
                 passwordHint.style.display = 'block';
                 activeGroup.style.display = 'block';
                 activeInput.checked = branch.active !== false;
             } else {
-                title.textContent = 'نوې برخه';
+                title.textContent = 'نوې څانګه';
                 document.getElementById('branchId').value = '';
                 document.getElementById('branchName').value = '';
                 emailInput.value = '';
                 emailInput.disabled = false;
                 currentBranchRole = 'admin';
                 deactivateBtn.style.display = 'none';
+                deleteBtn.style.display = 'none';
                 passwordHint.style.display = 'none';
                 activeGroup.style.display = 'none';
                 activeInput.checked = true;
@@ -8637,21 +8697,23 @@
             const email = document.getElementById('branchEmail').value.trim().toLowerCase();
             const password = document.getElementById('branchPassword').value;
             const role = currentBranchRole === 'viewer' ? 'viewer' : 'admin';
+            const saveBtn = document.getElementById('saveBranchBtn');
 
-            if (!name) { showToast('د برخې نوم د پر کول ضروري دی'); return; }
+            if (!name) { showToast('د څانګې نوم د پر کول ضروري دی'); return; }
             if (!email) { showToast('ایمیل د پر کول ضروري دی'); return; }
             if (!id && state.branches.some(b => String(b.email || '').toLowerCase() === email)) {
-                showToast('دا ایمیل لا یوې برخې ته ټاکل شوی دی');
+                showToast('دا ایمیل لا یوې څانګې ته ټاکل شوی دی');
                 return;
             }
-            if (!isOnline) { showToast('برخه جوړول یا بدلول انټرنټ ته اړتیا لري'); return; }
+            if (!id && (!password || password.length < 6)) {
+                showToast('پاسورډ باید لږ تر لږه ۶ توري وي');
+                return;
+            }
+            if (!isOnline) { showToast('څانګه جوړول یا بدلول انټرنټ ته اړتیا لري'); return; }
 
-            if (!id) {
-                if (!password || password.length < 6) {
-                    showToast('پاسورډ باید لږ تر لږه ۶ توري وي');
-                    return;
-                }
-                try {
+            setButtonLoading(saveBtn, id ? 'خوندي کېږي...' : 'جوړېږي...');
+            try {
+                if (!id) {
                     let uid = null;
                     let createdAuth = false;
                     try {
@@ -8708,23 +8770,18 @@
                     closeBranchModal();
                     renderBranchesSettings();
                     renderBranchChips();
-                    showToast(createdAuth ? 'برخه جوړه شوه' : 'برخه جوړه شوه - دا ایمیل لا دمخه فایربیس اکاونټ لري');
-                } catch (error) {
-                    console.error('Branch creation failed:', error);
-                    showToast('برخه جوړه نشوه - ' + (error.message || 'بیا هڅه وکړئ'));
+                    showToast(createdAuth ? 'څانګه جوړه شوه' : 'څانګه جوړه شوه - دا ایمیل لا دمخه فایربیس اکاونټ لري');
+                    return;
                 }
-                return;
-            }
 
-            const branch = getBranchById(id);
-            if (!branch) return;
-            branch.name = name;
-            branch.role = role;
-            branch.active = document.getElementById('branchActive').checked;
-            branch.updatedAt = Date.now();
-            branch.version = (branch.version || 0) + 1;
+                const branch = getBranchById(id);
+                if (!branch) return;
+                branch.name = name;
+                branch.role = role;
+                branch.active = document.getElementById('branchActive').checked;
+                branch.updatedAt = Date.now();
+                branch.version = (branch.version || 0) + 1;
 
-            try {
                 await writeBranchDoc(branch);
                 removeFromQueue('branches', id);
                 saveState(true);
@@ -8739,10 +8796,12 @@
                 closeBranchModal();
                 renderBranchesSettings();
                 renderBranchChips();
-                showToast('برخه تصحیح شوه');
+                showToast('څانګه تصحیح شوه');
             } catch (error) {
-                console.error('Branch update failed:', error);
-                showToast('برخه تصحیح نشوه - ' + (error.message || 'بیا هڅه وکړئ'));
+                console.error('Branch save failed:', error);
+                showToast((id ? 'څانګه تصحیح نشوه - ' : 'څانګه جوړه نشوه - ') + (error.message || 'بیا هڅه وکړئ'));
+            } finally {
+                clearButtonLoading(saveBtn);
             }
         }
 
@@ -8753,11 +8812,13 @@
             const branch = getBranchById(id);
             if (!branch) return;
 
+            closeBranchModal();
             openConfirmModal(
-                'برخه غیر فعالول',
-                'دا برخه به نوره ونشي کولای ننوځي. آیا ډاډه یاست؟',
+                'څانګه غیر فعالول',
+                'دا څانګه به نوره ونشي کولای ننوځي. آیا ډاډه یاست؟',
                 async () => {
-                    closeConfirmModal();
+                    const confirmBtn = document.getElementById('confirmYesBtn');
+                    setButtonLoading(confirmBtn, 'غیر فعالېږي...');
                     branch.active = false;
                     branch.updatedAt = Date.now();
                     branch.version = (branch.version || 0) + 1;
@@ -8765,15 +8826,121 @@
                         await writeBranchDoc(branch);
                         removeFromQueue('branches', id);
                         saveState(true);
-                        closeBranchModal();
                         renderBranchesSettings();
                         renderBranchChips();
-                        showToast('برخه غیر فعاله شوه');
+                        closeConfirmModal();
+                        showToast('څانګه غیر فعاله شوه');
                     } catch (error) {
-                        showToast('برخه غیر فعاله نشوه - ' + (error.message || 'بیا هڅه وکړئ'));
+                        showToast('څانګه غیر فعاله نشوه - ' + (error.message || 'بیا هڅه وکړئ'));
+                    } finally {
+                        clearButtonLoading(confirmBtn);
                     }
                 }
             );
+        }
+
+        async function branchHasBusinessData(branchId) {
+            const collections = ['accounts', 'transactions', 'stockBalances', 'moneyBalances', 'deletedTransactions', 'editHistory'];
+            for (const collection of collections) {
+                const snap = await withTimeout(
+                    getBranchCollectionRef(branchId, collection).limit(1).get(),
+                    20000
+                );
+                if (!snap.empty) return true;
+            }
+            return false;
+        }
+
+        async function deleteCollectionDocs(branchId, collection) {
+            const collectionRef = getBranchCollectionRef(branchId, collection);
+            const snap = await withTimeout(collectionRef.get(), 20000);
+            const docs = snap.docs;
+            const CHUNK = 450;
+            for (let i = 0; i < docs.length; i += CHUNK) {
+                const batch = db.batch();
+                docs.slice(i, i + CHUNK).forEach(doc => batch.delete(doc.ref));
+                await withTimeout(batch.commit(), 20000);
+            }
+        }
+
+        async function deleteBranch() {
+            if (!canManageBranches()) return;
+            const id = document.getElementById('branchId').value;
+            if (!id) return;
+            const branch = getBranchById(id);
+            if (!branch) return;
+            if (!isOnline) { showToast('څانګه ډيليټ کول انټرنټ ته اړتیا لري'); return; }
+
+            const deleteBtn = document.getElementById('deleteBranchBtn');
+            setButtonLoading(deleteBtn, 'څانګه ډيليټ کېږي...');
+            try {
+                const hasData = await branchHasBusinessData(id);
+                if (hasData) {
+                    showToast('په دې څانګه کې حسابونه یا معاملې شته — لومړی یې پاک کړئ');
+                    return;
+                }
+                closeBranchModal();
+                openConfirmModal(
+                    'څانګه ډيليټ کول',
+                    'دا څانګه به تل لپاره ډيليټ شي. آیا ډاډه یاست؟',
+                    () => performDeleteBranch(id)
+                );
+            } catch (error) {
+                console.error('Branch delete check failed:', error);
+                showToast('څانګه ډيليټ نشوه — ' + (error.message || 'بیا هڅه وکړئ'));
+            } finally {
+                clearButtonLoading(deleteBtn);
+            }
+        }
+
+        async function performDeleteBranch(branchId) {
+            const confirmBtn = document.getElementById('confirmYesBtn');
+            setButtonLoading(confirmBtn, 'ډيليټ کېږي...');
+            try {
+                const branch = getBranchById(branchId);
+                for (const collection of SYNC_COLLECTIONS) {
+                    await deleteCollectionDocs(branchId, collection);
+                }
+                await deleteCollectionDocs(branchId, 'settings');
+
+                await withTimeout(getBranchDocRef(branchId).delete(), 20000);
+
+                if (branch && branch.uid) {
+                    try {
+                        // Keep a disabled mapping so the deleted branch user is
+                        // blocked instead of falling through as a main account.
+                        await withTimeout(
+                            db.doc(APP_DOC).collection('branchUsers').doc(branch.uid).set({
+                                branchId: branchId,
+                                active: false,
+                                deletedAt: Date.now()
+                            }, { merge: true }),
+                            20000
+                        );
+                    } catch (error) {
+                        console.warn('Could not update branch user mapping:', error);
+                    }
+                }
+                state.branches = state.branches.filter(b => b.id !== branchId);
+                SYNC_COLLECTIONS.forEach(collection => {
+                    state[collection] = (state[collection] || []).filter(rec => rec.branchId !== branchId);
+                });
+                if (state.branchSettings) delete state.branchSettings[branchId];
+                const refreshAll = state.currentBranchId === 'all' || state.currentBranchId === branchId;
+                if (state.currentBranchId === branchId) state.currentBranchId = 'all';
+                saveState(true);
+                renderBranchesSettings();
+                renderBranchChips();
+                closeConfirmModal();
+                showToast('څانګه ډيليټ شوه');
+
+                if (refreshAll) await loadBranchView('all');
+            } catch (error) {
+                console.error('Branch delete failed:', error);
+                showToast('څانګه ډيليټ نشوه — ' + (error.message || 'بیا هڅه وکړئ'));
+            } finally {
+                clearButtonLoading(confirmBtn);
+            }
         }
 
         // Party Modal

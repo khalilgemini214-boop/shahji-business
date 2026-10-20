@@ -90,10 +90,14 @@ appData/shahji_business/branchUsers/{firebaseUid}
 - **Viewer (`viewer`)** — read-only access to its own branch.
 
 Branch logins are real Firebase Auth users. Creating a branch in
-**Settings → برخې** creates the Firebase user with the entered password and
+**Settings → څانګي** creates the Firebase user with the entered password and
 writes the UID → branch mapping used for secure lookups. The password itself is
 never stored in Firestore. Editing a branch with a new password sends a
 Firebase password-reset email.
+
+Branches can be **deactivated** (login blocked, data kept) or **deleted**.
+Deletion is refused while the branch still contains accounts, stock/money
+transactions, balances, or transaction history.
 
 ### Deploy the Firestore rules
 
