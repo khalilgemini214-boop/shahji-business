@@ -4651,7 +4651,10 @@
                 await LiveUpdate.setNextBundle({ bundleId: bundleId });
 
                 if (allowReload) {
+                    showToast('نوی نسخه ډاونلوډ شوه - اپ بیا پیلېږي...');
                     await LiveUpdate.reload();
+                } else {
+                    showToast('نوی نسخه ډاونلوډ شوه - اپ بیا پیل کړئ');
                 }
             } catch (error) {
                 console.warn('Update check failed:', error);
@@ -4673,9 +4676,9 @@
                 }
             }
 
-            // Download and stage the bundle now; it is applied on the next
-            // app start so an update never interrupts the user mid-session.
-            await checkForUpdates(false);
+            // On launch it is safe to download and apply immediately. This is
+            // what makes OTA updates show up on the very next app start.
+            await checkForUpdates(true);
 
             if (typeof plugins.App.addListener === 'function') {
                 plugins.App.addListener('appStateChange', ({ isActive }) => {
