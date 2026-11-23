@@ -4353,6 +4353,7 @@
                 20000
             );
             data.settings = settingsSnap.exists ? settingsSnap.data() : {};
+            branchDataCache[branchId] = data;
             return data;
         }
 
@@ -5317,6 +5318,9 @@
         let currentLedgerProduct = null;
         let currentLedgerUnit = null;
         let ledgerFormContext = null;
+        // Main account: per-branch snapshot cache so chip switching is instant
+        // and keeps working offline, like filtering local data.
+        let branchDataCache = {};
 
         function getAccountMoneyCurrencies(accountId) {
             const currencies = new Set();
@@ -8527,9 +8531,95 @@
             chips.innerHTML = html;
         }
 
-        function switchMainBranch(branchId) {
+        function cacheActiveBranchSnapshot() {
+            if (!isMainAccount()) return;
+            const branchId = state.currentBranchId;
+            if (!branchId || branchId === 'all') return;
+            const data = {
+                settings: {
+                    defaultCurrency: state.defaultCurrency,
+                    defaultUnit: state.defaultUnit,
+                    defaultProduct: state.defaultProduct
+                }
+            };
+            SYNC_COLLECTIONS.forEach(collection => {
+                data[collection] = (state[collection] || []).filter(rec => rec.branchId === branchId);
+            });
+            branchDataCache[branchId] = data;
+        }
+
+        function combineCachedBranchData() {
+            const activeBranches = (state.branches || []).filter(b => b.active !== false);
+            if (!activeBranches.length) {
+                const empty = { settings: {} };
+                SYNC_COLLECTIONS.forEach(collection => { empty[collection] = []; });
+                return empty;
+            }
+            if (!activeBranches.every(branch => branchDataCache[branch.id])) return null;
+
+            const combined = { settings: {} };
+            SYNC_COLLECTIONS.forEach(collection => { combined[collection] = []; });
+            const settingsByBranch = {};
+            activeBranches.forEach(branch => {
+                const data = branchDataCache[branch.id];
+                settingsByBranch[branch.id] = data.settings || {};
+                SYNC_COLLECTIONS.forEach(collection => {
+                    combined[collection].push(...(data[collection] || []));
+                });
+            });
+            const firstSettings = settingsByBranch[activeBranches[0].id] || {};
+            combined.settings = {
+                defaultCurrency: firstSettings.defaultCurrency || 'PKR',
+                defaultUnit: firstSettings.defaultUnit || '',
+                defaultProduct: firstSettings.defaultProduct || ''
+            };
+            state.branchSettings = settingsByBranch;
+            return combined;
+        }
+
+        function rebuildBranchCacheFromState() {
+            if (!isMainAccount() || !state.currentBranchId) return;
+            if (state.currentBranchId === 'all') {
+                const branchIds = new Set((state.branches || []).map(b => b.id));
+                branchIds.forEach(branchId => {
+                    const data = { settings: (state.branchSettings && state.branchSettings[branchId]) || {} };
+                    SYNC_COLLECTIONS.forEach(collection => {
+                        data[collection] = (state[collection] || []).filter(rec => rec.branchId === branchId);
+                    });
+                    branchDataCache[branchId] = data;
+                });
+            } else {
+                cacheActiveBranchSnapshot();
+            }
+        }
+
+        async function switchMainBranch(branchId) {
             if (!isMainAccount()) return;
             if (branchId === state.currentBranchId) return;
+
+            // Keep the branch we are leaving in the local cache.
+            cacheActiveBranchSnapshot();
+
+            if (branchId === 'all') {
+                const combined = combineCachedBranchData();
+                if (combined) {
+                    applyBranchSnapshot(combined, 'all', false);
+                    state.currentBranchId = 'all';
+                    saveState(true);
+                    renderAll();
+                    renderBranchChips();
+                    return;
+                }
+            } else if (branchDataCache[branchId]) {
+                applyBranchSnapshot(branchDataCache[branchId], branchId, true);
+                state.currentBranchId = branchId;
+                saveState(true);
+                renderAll();
+                renderBranchChips();
+                return;
+            }
+
+            // Not cached yet: load that branch from Firestore.
             loadBranchView(branchId);
         }
 
@@ -8925,6 +9015,7 @@
                     }
                 }
                 state.branches = state.branches.filter(b => b.id !== branchId);
+                delete branchDataCache[branchId];
                 SYNC_COLLECTIONS.forEach(collection => {
                     state[collection] = (state[collection] || []).filter(rec => rec.branchId !== branchId);
                 });
@@ -9522,6 +9613,7 @@
         updateSyncIndicator();
         renderFirebaseAccountUI();
         if (state.loginStatus && state.currentUser) {
+            if (state.currentRole === 'main') rebuildBranchCacheFromState();
             renderAll();
         } else {
             showLoginModal(true);
